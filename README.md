@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/castle.jpg" width=50 align="right" />
+<img src="man/figures/castle.png" width=50 align="right" />
 
 # nybem
 
