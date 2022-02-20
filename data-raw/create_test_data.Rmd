@@ -1,0 +1,109 @@
+---
+title: "Create test data"
+output: html
+---
+
+```{r install, eval=FALSE}
+# install dev version of FedData
+remotes::install_github("ropensci/FedData")
+
+# if install_github fails, clone and install from local clone
+```
+
+
+```{r setup}
+library(nybem)
+library(FedData)
+library(raster)
+library(rgdal)
+library(sp)
+library(tmap)
+library(grDevices)
+library(usethis)
+```
+
+```{r set-project-crs}
+# Set study area coordinate system for NJ-NY
+# EPSG:6347 - NAD83(2011) / UTM zone 18N
+study_area_crs <- sp::CRS(SRS_string = "EPSG:6347")
+```
+
+```{r create-study-area}
+# test study area extent in NAD83(2011) / UTM zone 18N
+# Chestnut Neck Boatyard, Garden State Parkway S, Exit 48 / Route 9, Mullica River
+study_area_extent <- raster::extent(544900,547600,4376700,4379300)
+study_area <- polygon_from_extent(study_area_extent, 
+                                  proj4string = proj4string(study_area_crs))
+```
+
+```{r get-ned}
+NED <- get_ned(template = study_area, 
+               label = 'study_area')
+```
+
+```{r get-nlcd}
+NLCD <- get_nlcd(template = study_area, 
+                 year = 2011, 
+                 dataset = "landcover", 
+                 label = 'study_area')
+```
+
+```{r reproject}
+# Project all layers to study_area coordinate system
+nlcd_utm18 <- projectRaster(NLCD, 
+                            res = c(30, 30),
+                            crs = study_area_crs,
+                            method = "ngb")
+# Mask to study area extent
+nlcd <- crop(nlcd_utm18, study_area)
+
+# Snap to NLCD
+ned <- projectRaster(NED, 
+                     res = c(30, 30),
+                     crs = study_area_crs,
+                     to = nlcd_crop,
+                     method = "bilinear")
+```
+
+```{r create-palettes}
+# Create a topo color ramp
+esri_topo <- grDevices::colorRampPalette(colors = c("cadetblue2", "khaki1",
+                                                    "chartreuse4", "goldenrod1",
+                                                    "orangered4", "saddlebrown",
+                                                    "gray70", "white"),
+                                         bias = 1,
+                                         space = "Lab",
+                                         interpolate = "linear")
+# Get NLCD color map palette
+nlcd_pal <- pal_nlcd()
+NLCD_m <- as.matrix(table(raster::values(NLCD)))
+nlcd_cols <- dplyr::filter(pal_nlcd(), ID %in% row.names(NLCD_m))
+```
+
+```{r display-nlcd}
+tm_shape(nlcd) +
+  tm_raster(style = "cat",
+            labels = nlcd_cols$Class,
+            palette = nlcd_cols$Color,
+            title = "NLCD Land Cover") + 
+tm_shape(study_area, 
+         name = "Study Area") + 
+  tm_borders() +
+tm_legend(outside = TRUE, text.size = .5)
+```
+
+```{r display-ned}
+tm_shape(ned) +
+  tm_raster(style = "cont", 
+            palette = esri_topo(1000), 
+            title = "NED Elevation") + 
+tm_shape(study_area, 
+         name = "Study Area") + 
+  tm_borders() +
+tm_legend(outside = TRUE, text.size = .8)
+```
+
+```{r save-data}
+usethis::use_data(nlcd, ned)
+```
+
