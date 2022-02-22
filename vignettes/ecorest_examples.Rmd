@@ -11,6 +11,69 @@ vignette: >
 library(ecorest)
 ```
 
+```{r}
+ecorest_db <- ecorest::HSImetadata
+hsi_models <- HSImodels
+```
+
+## SIcalc example
+```{r}
+#Build and define a matrix of the Barred Owl suitability curves
+#Allen A.W. 1982. Habitat Suitability Index Models: Barred owl. FWS/OBS 82/10.143.
+#U.S. Fish and Wildlife Service. https://pubs.er.usgs.gov/publication/fwsobs82_10_143.
+var1 <- cbind(c(0,2,4,NA), c(0.1,1,1,NA)) #Number of trees > 51cm diameter per 0.4 ha plot
+var2 <- cbind(c(0,5,20,NA), c(0,0,1,NA)) #Mean diameter of overstory trees
+var3 <- cbind(c(0,20,60,100), c(0,0,1,1)) #Percent canopy cover of overstory trees
+barredowl_matrix <- cbind(var1, var2, var3)
+barredowl_1 <- as.data.frame(barredowl_matrix)
+colnames(barredowl_1)<- c("tree.num", "tree.num.SIV", "avg.dbh.in", 
+                          "avg.dbh.SIV", "can.cov", "can.cov.SIV")
+
+#Set user input variables that should return (1, 0, 0)
+input.demo1 <- c(2, 5, 20)
+SIcalc(barredowl_1, input.demo1)
+```
+
+```{r}
+#Suitability curves may also be drawn from HSImodels (data within ecorest)
+#Import Barred Owl suitability curves with HSImodels$barredowl
+#The input examples are repeated from above
+
+#Set user input variables that should return (1, 0, 0)
+barredowl_2 <- HSImodels$barredowl
+SIcalc(barredowl_2, input.demo1)
+```
+
+## HSIarimean example
+```{r}
+#Determine patch quality based on a vector of four suitability indices.
+HSIarimean(c(0.25, 0.25, 0.25, 0.25))
+
+#Determine patch quality based on a vector of suitability indices with an NA.
+HSIarimean(c(0.25, 0.25, NA, 0.25))
+
+#Demonstrate error message associated with out of range outcomes.
+HSIarimean(c(0.25, 0.25, 10.00, 0.25))
+```
+
+## HSIplotter example
+```{r}
+#Build and define a matrix of the Barred Owl suitability curves
+#Allen A.W. 1982. Habitat Suitability Index Models: Barred owl. FWS/OBS 82/10.143.
+#U.S. Fish and Wildlife Service. https://pubs.er.usgs.gov/publication/fwsobs82_10_143.
+var1 <- cbind(c(0,2,4,NA), c(0.1,1,1,NA)) #Number of trees > 51cm diameter per 0.4 ha plot
+var2 <- cbind(c(0,5,20,NA), c(0,0,1,NA)) #Mean diameter of overstory trees
+var3 <- cbind(c(0,20,60,100), c(0,0,1,1)) #Percent canopy cover of overstory trees
+barredowl_3<- cbind(var1, var2, var3)
+colnames(barredowl_3)<- c("tree.num", "tree.num.SIV",
+  "avg.dbh.in", "avg.dbh.SIV", "can.cov", "can.cov.SIV")
+
+#Create suitability curve summary plot
+HSIplotter(barredowl_3, figure.name = "BarredOwl.jpeg")
+knitr::include_graphics(path = "BarredOwl.jpeg")
+```
+
+
 ## Example 1
 ```{r example-1}
 #Grab a model - store as character string
