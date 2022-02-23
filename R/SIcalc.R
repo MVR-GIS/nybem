@@ -28,7 +28,7 @@
 #' * US Fish and Wildlife Service. (1981). Standards for the Development of
 #'   Habitat Suitability Index Models. Ecological Services Manual, 103.
 #'
-#' @importFrom raster getValues
+#' @importFrom raster getValues setValues
 #'
 SIcalc <- function (SI, input_proj) {
   # Check parameters
@@ -52,7 +52,7 @@ SIcalc <- function (SI, input_proj) {
     current_metric_continuous <- is.numeric(metric_vector)
 
     # Set current input_proj values
-    current_input_raster <- is.raster(input_proj[[i]])
+    current_input_raster <- nybem::is_RasterLayer(input_proj[[i]])
     if(current_input_raster) {
       current_input <- raster::getValues(input_proj[[i]])
     } else {
@@ -67,18 +67,25 @@ SIcalc <- function (SI, input_proj) {
 
     # Calculate continuous SI
     if(current_metric_continuous == TRUE) {
-      SI_out[i] <- approx(metric_vector, si_vector,
-                          xout = current_input,
-                          method = "linear",
-                          rule = 2,
-                          ties = "ordered")$y
+      si <- approx(metric_vector, si_vector,
+                   xout = current_input,
+                   method = "linear",
+                   rule = 2,
+                   ties = "ordered")$y
     }
 
     # Calculate categorical SI
     if(current_metric_continuous != TRUE) {
-      SI_out[i] <- SI[which(metric_vector == current_input),
-                      current_si_column]
+      #SI_out[[i]] <- SI[which(metric_vector == current_input), current_si_column]
     }
+
+    # Assign si to SI_out[i]
+    if(current_input_raster) {
+      SI_out[[i]] <- raster::setValues(input_proj[[i]], si)
+    } else {
+      SI_out[[i]] <- si
+    }
+
   }
   return(SI_out)
 }

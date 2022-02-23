@@ -2,3 +2,4 @@
 
 export(SIcalc)
 importFrom(raster,getValues)
+importFrom(raster,setValues)
