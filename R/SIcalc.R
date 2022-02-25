@@ -28,7 +28,8 @@
 #' * US Fish and Wildlife Service. (1981). Standards for the Development of
 #'   Habitat Suitability Index Models. Ecological Services Manual, 103.
 #'
-#' @importFrom raster getValues setValues
+#' @importFrom raster raster values getValues setValues levels
+#' @importFrom stats approx
 #'
 SIcalc <- function (SI, input_proj) {
   # Check parameters
@@ -60,32 +61,35 @@ SIcalc <- function (SI, input_proj) {
     }
 
     # Check if current metric and input are of the same data type
-    current_input_continuous <- is.numeric(current_input)
+    current_input_continuous <- all(
+                    is.numeric(current_input),
+                    if(current_input_raster) {!input_proj[[i]]@data@isfactor})
     if(current_input_continuous != current_metric_continuous) {
-      stop("Input data types must match data types of SI model metrics")
-    }
+      stop("Input data types must match data types of SI model metrics")}
 
     # Calculate continuous SI
     if(current_metric_continuous == TRUE) {
       si <- approx(metric_vector, si_vector,
                    xout = current_input,
-                   method = "linear",
-                   rule = 2,
-                   ties = "ordered")$y
+                   method = "linear", rule = 2, ties = "ordered")$y
     }
 
     # Calculate categorical SI
     if(current_metric_continuous != TRUE) {
-      #SI_out[[i]] <- SI[which(metric_vector == current_input), current_si_column]
+      # Create named vector for lookup
+      get_cat_metric <- si_vector
+      names(get_cat_metric) <- metric_vector
+
+      # Get si values for current_input
+      si <- unname(get_cat_metric[current_input])
     }
 
-    # Assign si to SI_out[i]
+    # Assign si to SI_out[[i]]
     if(current_input_raster) {
       SI_out[[i]] <- raster::setValues(input_proj[[i]], si)
     } else {
       SI_out[[i]] <- si
     }
-
   }
   return(SI_out)
 }
