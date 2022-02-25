@@ -55,7 +55,7 @@ nlcd_utm18 <- projectRaster(NLCD,
                             crs = study_area_crs,
                             method = "ngb")
 # Mask to study area extent
-nlcd <- crop(nlcd_utm18, study_area)
+nlcd_crop <- crop(nlcd_utm18, study_area)
 
 # Snap to NLCD
 ned <- projectRaster(NED, 
