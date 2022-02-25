@@ -1,5 +1,3 @@
-##### Check Single Numeric Metrics ####################################################
-
 # Build and define a matrix of the Barred Owl suitability curves
 # Allen A.W. 1982. Habitat Suitability Index Models: Barred owl.
 # FWS/OBS 82/10.143.
