@@ -2,6 +2,7 @@
 #'
 #' @description Used to test if an object is of class `raster::RasterLayer`.
 #'
+#' @export
 #' @param x   The object whose class is to be tested.
 #'
 #' @return logical; TRUE if class is of type `raster::RasterLayer`
