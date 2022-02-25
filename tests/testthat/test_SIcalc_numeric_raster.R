@@ -32,7 +32,7 @@ expected_si_tree_num <- c(1, 1, 1, 1)
 expected_si_avg_dbh  <- c(0, 0, 0, 0)
 expected_si_can_cov  <- c(0, 0, 0, 0)
 
-test_that("check barredowl results", {
+test_that("check barredowl numeric raster results", {
   expect_equal(si_tree_num, expected_si_tree_num)
   expect_equal(si_avg_dbh, expected_si_avg_dbh)
   expect_equal(si_can_cov, expected_si_can_cov)
