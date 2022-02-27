@@ -7,6 +7,11 @@
 #'
 #' @return logical; TRUE if class is of type `raster::RasterLayer`
 #'
+#' @importFrom raster raster values getValues setValues minValue maxValue
+#'                    crop extent ncol nrow ncell
+#'                    projectRaster proj4string
+#' @importFrom sp CRS
+#'
 is_RasterLayer <- function(x) {
   if(class(x)[[1]] == "RasterLayer") {
     raster_layer <- TRUE
