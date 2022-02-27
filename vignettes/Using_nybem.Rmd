@@ -7,13 +7,38 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+
+
+```{r}
+library(raster)
 ```
 
-```{r setup}
-library(nybem)
+## Working With Categorical Rasters
+The purpose of this step is to demonstrate how to properly build a categorical raster for use in creating an input metric to calculate a suitability index. 
+
+```{r}
+# Create raster categorical metric for testing: wat.regime
+obs_wtr_regime <- raster::raster(ncol = 3, nrow = 3)
+
+# Assign integer values 1-6 to represent the 6 water regimes 
+obs_wtr_regime <- raster::setValues(obs_wtr_regime,
+                                    rep_len(1:6, 
+                                            raster::ncell(obs_wtr_regime)))
+
+# Convert the raster to a factor and create a blank raster attribute table
+obs_wtr_regime <- raster::ratify(obs_wtr_regime)
+
+# Extract the raster factor levels and write to a new data frame
+obs_wtr_regime_rat <- levels(obs_wtr_regime)[[1]]
+
+# Create a new column to hold the factor labels
+obs_wtr_regime_rat$class <- c("a", "b", "c", "d", "e", "f")
+
+# Use this data frame to set the levels of the raster attribute table
+levels(obs_wtr_regime) <- obs_wtr_regime_rat
+
+obs_wtr_regime
 ```
+
+
+
