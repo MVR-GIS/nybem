@@ -3,16 +3,18 @@ title: "Create test data"
 output: html
 ---
 
+## Managing raster data in R
+
 ```{r install, eval=FALSE}
-# install dev version of FedData
+# install dev version of FedData for latest functionality
 remotes::install_github("ropensci/FedData")
 
 # if install_github fails, clone and install from local clone
 ```
 
-
 ```{r setup}
 library(nybem)
+library(dplyr)
 library(FedData)
 library(raster)
 library(rgdal)
@@ -28,27 +30,41 @@ library(usethis)
 study_area_crs <- sp::CRS(SRS_string = "EPSG:6347")
 ```
 
+```{r create-palettes}
+# Create a topo color ramp
+esri_topo <- grDevices::colorRampPalette(colors = c("cadetblue2", "khaki1",
+                                                    "chartreuse4", "goldenrod1",
+                                                    "orangered4", "saddlebrown",
+                                                    "gray70", "white"),
+                                         bias = 1,
+                                         space = "Lab",
+                                         interpolate = "linear")
+# Get NLCD color map palette
+nlcd_pal <- FedData::pal_nlcd()
+```
+
+## Create a small test area
+Create a small test study area for efficient process testing. Test are centered on the Chestnut Neck Boatyard, Garden State Parkway S, Exit 48 at Route 9, located on the Mullica River. 
 ```{r create-study-area}
-# test study area extent in NAD83(2011) / UTM zone 18N
-# Chestnut Neck Boatyard, Garden State Parkway S, Exit 48 / Route 9, Mullica River
+# extent expressed in NAD83(2011) / UTM zone 18N
 study_area_extent <- raster::extent(544900,547600,4376700,4379300)
-study_area <- polygon_from_extent(study_area_extent, 
+study_area <- FedData::polygon_from_extent(study_area_extent, 
                                   proj4string = proj4string(study_area_crs))
 ```
 
 ```{r get-ned}
-NED <- get_ned(template = study_area, 
-               label = 'study_area')
+NED <- FedData::get_ned(template = study_area, 
+                        label = 'study_area')
 ```
 
 ```{r get-nlcd}
-NLCD <- get_nlcd(template = study_area, 
-                 year = 2011, 
-                 dataset = "landcover", 
-                 label = 'study_area')
+NLCD <- FedData::get_nlcd(template = study_area, 
+                          year = 2011, 
+                          dataset = "landcover", 
+                          label = 'study_area')
 ```
 
-```{r reproject}
+```{r test-reproject}
 # Project all layers to study_area coordinate system
 nlcd_utm18 <- projectRaster(NLCD, 
                             res = c(30, 30),
@@ -65,23 +81,11 @@ ned <- projectRaster(NED,
                      method = "bilinear")
 ```
 
-```{r create-palettes}
-# Create a topo color ramp
-esri_topo <- grDevices::colorRampPalette(colors = c("cadetblue2", "khaki1",
-                                                    "chartreuse4", "goldenrod1",
-                                                    "orangered4", "saddlebrown",
-                                                    "gray70", "white"),
-                                         bias = 1,
-                                         space = "Lab",
-                                         interpolate = "linear")
-# Get NLCD color map palette
-nlcd_pal <- pal_nlcd()
-NLCD_m <- as.matrix(table(raster::values(NLCD)))
-nlcd_cols <- dplyr::filter(pal_nlcd(), ID %in% row.names(NLCD_m))
-```
-
 ```{r display-nlcd}
-tm_shape(nlcd) +
+nlcd_classes <- sort(unique(values(nlcd_nj_shore)))
+nlcd_cols <- dplyr::filter(pal_nlcd(), ID %in% nlcd_classes)
+
+tm_shape(nlcd_crop) +
   tm_raster(style = "cat",
             labels = nlcd_cols$Class,
             palette = nlcd_cols$Color,
@@ -103,7 +107,82 @@ tm_shape(study_area,
 tm_legend(outside = TRUE, text.size = .8)
 ```
 
-```{r save-data}
-usethis::use_data(nlcd, ned)
+```{r save-data, eval=FALSE}
+#usethis::use_data(nlcd, ned)
+```
+
+
+## Create large study area
+Create a large study area for practical process testing. The extents of this study area cover the whole of the NJ Atlantic shoreline (i.e., not including Delaware Bay), West: Wharton State Forest, Cape May; East: Sea Bright; North: Edison; South: Cape May. 
+
+```{r create-study-area-nj-shore}
+# extent expressed in NAD83(2011) / UTM zone 18N
+nj_shore_extent <- raster::extent(500000,600000,4300000,4485000)
+nj_shore <- FedData::polygon_from_extent(nj_shore_extent, 
+                                  proj4string = proj4string(study_area_crs))
+```
+
+```{r get-ned-nj-shore, eval=TRUE}
+NED_nj_shore <- FedData::get_ned(template = nj_shore, 
+                                 label = 'nj_shore',
+                                 res = "1",
+                                 force.redo = TRUE)
+NED_nj_shore
+```
+
+```{r get-nlcd-nj-shore, eval=TRUE}
+NLCD_nj_shore <- FedData::get_nlcd(template = nj_shore, 
+                                   label = 'nj-shore',
+                                   year = 2011, 
+                                   dataset = "landcover", 
+                                   force.redo = TRUE)
+NLCD_nj_shore
+```
+
+```{r reproject-nj-shore, eval=TRUE}
+# Project all layers to study_area coordinate system
+nlcd_nj_shore_utm18 <- projectRaster(NLCD_nj_shore, 
+                                     res = c(30, 30),
+                                     crs = study_area_crs,
+                                     method = "ngb")
+# Mask to study area extent
+nlcd_nj_shore <- crop(nlcd_nj_shore_utm18, nj_shore)
+
+# Snap to NLCD
+ned_nj_shore <- projectRaster(NED_nj_shore, 
+                              res = c(30, 30),
+                              crs = study_area_crs,
+                              to = nlcd_nj_shore,
+                              method = "bilinear")
+```
+
+```{r display-nlcd-nj-shore}
+nlcd_classes <- sort(unique(values(nlcd_nj_shore)))
+nlcd_cols <- dplyr::filter(pal_nlcd(), ID %in% nlcd_classes)
+
+tm_shape(nlcd_nj_shore) +
+  tm_raster(style = "cat",
+            labels = nlcd_cols$Class,
+            palette = nlcd_cols$Color,
+            title = "NLCD Land Cover") + 
+tm_shape(nj_shore, 
+         name = "NJ Shore") + 
+  tm_borders() +
+tm_legend(outside = TRUE, text.size = .5)
+```
+
+```{r display-ned}
+tm_shape(ned_nj_shore) +
+  tm_raster(style = "cont", 
+            palette = esri_topo(1000), 
+            title = "NED Elevation") + 
+tm_shape(nj_shore,
+         name = "NJ Shore") +
+  tm_borders() +
+tm_legend(outside = TRUE, text.size = .8)
+```
+
+```{r save-data-nj-shore, eval=FALSE}
+#usethis::use_data(nlcd_nj_shore, ned_nj_shore)
 ```
 
