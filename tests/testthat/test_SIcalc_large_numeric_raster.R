@@ -20,7 +20,9 @@ test_model <- data.frame(m1, m2, m3)
 test_ncol <- 6167
 test_nrow <- 3333
 test_ncell <- test_ncol * test_nrow
-test_area_crs <- sp::CRS(SRS_string = "EPSG:6347")   # NAD83(2011)/UTM zone 18N
+suppressWarnings({                                   # PROJ4 to PROJ6 warnings
+  test_area_crs <- sp::CRS(SRS_string = "EPSG:6347") # NAD83(2011)/UTM zone 18N
+})
 test_area_extent <- raster::extent(500000,600000,4300000,4485000)  # NJ shore
 test_resolution <- c(30, 30)                                       # NLCD res
 
