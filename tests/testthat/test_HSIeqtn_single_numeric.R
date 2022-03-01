@@ -50,4 +50,8 @@ test_that("check errors", {
   expect_error(HSIeqtn("barredowl", bo_test5, hsi_metadata))
   expect_error(HSIeqtn("alewifeJuv", al_test4, hsi_metadata))
   expect_error(HSIeqtn("alewifeJuv", al_test5, hsi_metadata))
+  expect_error(HSIeqtn(c("barredowl", "alewifeJuv"),
+                       bo_test4, hsi_metadata))
+  expect_error(HSIeqtn("barredowl", bo_test4, c(1,2,3)))
+  expect_error(HSIeqtn("barrrrrredowl", bo_test4, hsi_metadata))
 })
