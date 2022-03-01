@@ -12,7 +12,8 @@
 #' @param HSImodelname   character; A character string in quotations that
 #'                       must match an existing model name in HSImetadata.
 #' @param SIV            list; a vector of suitability index values used in
-#'                       the model specified in HSImodelname.
+#'                       the model specified in HSImodelname. Must be listed
+#'                       in the same order as specified in the model.
 #' @param HSImetadata    data frame; A data frame of HSI model metadata within
 #'                       the ecorest package.
 #'
@@ -27,80 +28,103 @@
 #'   Habitat Suitability Index Models. Ecological Services Manual, 103.
 #'
 HSIeqtn <- function (HSImodelname, SIV, HSImetadata) {
-  model.loc <- which(HSImetadata$model == HSImodelname)
-  SIV.model <- which(!is.na(HSImetadata[model.loc, 9:30]))
-  SIV.name.gen <- paste("SIV", SIV.model, sep = "")
-  var.name <- c(SIV.name.gen, "CF", "CC", "CCF",
-                "CWF", "CW", "CCB", "CCN", "CWQ",
-                "CR", "CCR", "CD", "COT", "CL",
-                "CEL", "CE", "CJ", "CFr", "CS",
-                "CA", "CI", "CNI", "CWFC", "CT",
-                "CJA", "Eqtn")
-  HSI <- vector("list", length = length(var.name))
-  names(HSI) <- var.name
-  HSI$CF <- parse(text = paste(HSImetadata$CF[model.loc]))
-  HSI$CC <- parse(text = paste(HSImetadata$CC[model.loc]))
-  HSI$CCF <- parse(text = paste(HSImetadata$CCF[model.loc]))
-  HSI$CWF <- parse(text = paste(HSImetadata$CWF[model.loc]))
-  HSI$CW <- parse(text = paste(HSImetadata$CW[model.loc]))
-  HSI$CCB <- parse(text = paste(HSImetadata$CCB[model.loc]))
-  HSI$CCN <- parse(text = paste(HSImetadata$CCN[model.loc]))
-  HSI$CWQ <- parse(text = paste(HSImetadata$CWQ[model.loc]))
-  HSI$CR <- parse(text = paste(HSImetadata$CR[model.loc]))
-  HSI$CCR <- parse(text = paste(HSImetadata$CCR[model.loc]))
-  HSI$CD <- parse(text = paste(HSImetadata$CD[model.loc]))
-  HSI$COT <- parse(text = paste(HSImetadata$COT[model.loc]))
-  HSI$CL <- parse(text = paste(HSImetadata$CL[model.loc]))
-  HSI$CEL <- parse(text = paste(HSImetadata$CEL[model.loc]))
-  HSI$CE <- parse(text = paste(HSImetadata$CE[model.loc]))
-  HSI$CJ <- parse(text = paste(HSImetadata$CJ[model.loc]))
-  HSI$CFr <- parse(text = paste(HSImetadata$CFr[model.loc]))
-  HSI$CS <- parse(text = paste(HSImetadata$CS[model.loc]))
-  HSI$CA <- parse(text = paste(HSImetadata$CA[model.loc]))
-  HSI$CI <- parse(text = paste(HSImetadata$CI[model.loc]))
-  HSI$CNI <- parse(text = paste(HSImetadata$CNI[model.loc]))
-  HSI$CWFC <- parse(text = paste(HSImetadata$CWFC[model.loc]))
-  HSI$CT <- parse(text = paste(HSImetadata$CT[model.loc]))
-  HSI$CJA <- parse(text = paste(HSImetadata$CJA[model.loc]))
-  HSI$Eqtn <- parse(text = paste(HSImetadata$Eqtn[model.loc]))
+  # Check parameters
+  if(!is.character(HSImodelname)) {
+    stop("HSImodelname must be of type character")}
+  if(length(HSImodelname) != 1) {
+    stop("HSImodelname must be a character vector with a single item")}
+  if(!is.data.frame(HSImetadata)) {
+    stop("HSImetadata must be a data frame.")}
+
+  # Identify model record number
+  model_index_num <- which(HSImetadata$model == HSImodelname)
+
+  # Subset HSImetadata for current model
+  model <- HSImetadata[model_index_num, ]
+
+  # Extract vector of integer positions of SI variables specified in model
+  SIV_var_num <- which(!is.na(HSImetadata[model_index_num, 9:30]))
+
+  # Generate a vector of the SI variable names specified in the model
+  SIV_var_names <- paste("SIV", SIV_var_num, sep = "")
+
+  # Check SIV parameter matches number of specified model metrics
+  if(length(SIV_var_num) != length(na.omit(SIV))) {
+    stop("SIV vector length does not match model equation.")}
+  if(any(is.na(SIV))) {
+    stop("SIV vector should not contain any missing data.")}
+
+  # Create the empty HSI list of variables and components
+  model_var_names <- c(SIV_var_names, "CF", "CC", "CCF", "CWF", "CW", "CCB",
+                       "CCN", "CWQ", "CR", "CCR", "CD", "COT", "CL", "CEL",
+                       "CE", "CJ", "CFr", "CS", "CA", "CI", "CNI", "CWFC",
+                       "CT", "CJA", "Eqtn")
+  HSI <- vector("list", length = length(model_var_names))
+  names(HSI) <- model_var_names
+
+  # Assign model component equation expressions to named HSI list items
+  HSI$CF   <- parse(text = paste(model$CF))
+  HSI$CC   <- parse(text = paste(model$CC))
+  HSI$CCF  <- parse(text = paste(model$CCF))
+  HSI$CWF  <- parse(text = paste(model$CWF))
+  HSI$CW   <- parse(text = paste(model$CW))
+  HSI$CCB  <- parse(text = paste(model$CCB))
+  HSI$CCN  <- parse(text = paste(model$CCN))
+  HSI$CWQ  <- parse(text = paste(model$CWQ))
+  HSI$CR   <- parse(text = paste(model$CR))
+  HSI$CCR  <- parse(text = paste(model$CCR))
+  HSI$CD   <- parse(text = paste(model$CD))
+  HSI$COT  <- parse(text = paste(model$COT))
+  HSI$CL   <- parse(text = paste(model$CL))
+  HSI$CEL  <- parse(text = paste(model$CEL))
+  HSI$CE   <- parse(text = paste(model$CE))
+  HSI$CJ   <- parse(text = paste(model$CJ))
+  HSI$CFr  <- parse(text = paste(model$CFr))
+  HSI$CS   <- parse(text = paste(model$CS))
+  HSI$CA   <- parse(text = paste(model$CA))
+  HSI$CI   <- parse(text = paste(model$CI))
+  HSI$CNI  <- parse(text = paste(model$CNI))
+  HSI$CWFC <- parse(text = paste(model$CWFC))
+  HSI$CT   <- parse(text = paste(model$CT))
+  HSI$CJA  <- parse(text = paste(model$CJA))
+  HSI$Eqtn <- parse(text = paste(model$Eqtn))
+
+  # Assign SI variables to HSI list items
   for (i in 1:length(SIV)) {
-    HSI[[i]] <- SIV[i]
+    HSI[[i]] <- SIV[[i]]
   }
-  HSI.out <- HSI
-  j <- length(SIV.model)
-  HSI.out[[j + 1]] <- with(HSI, eval(HSI$CF))
-  HSI.out[[j + 2]] <- with(HSI, eval(HSI$CC))
-  HSI.out[[j + 3]] <- with(HSI, eval(HSI$CCF))
-  HSI.out[[j + 4]] <- with(HSI, eval(HSI$CWF))
-  HSI.out[[j + 5]] <- with(HSI, eval(HSI$CW))
-  HSI.out[[j + 6]] <- with(HSI, eval(HSI$CCB))
-  HSI.out[[j + 7]] <- with(HSI, eval(HSI$CCN))
-  HSI.out[[j + 8]] <- with(HSI, eval(HSI$CWQ))
-  HSI.out[[j + 9]] <- with(HSI, eval(HSI$CR))
-  HSI.out[[j + 10]] <- with(HSI, eval(HSI$CCR))
-  HSI.out[[j + 11]] <- with(HSI, eval(HSI$CD))
-  HSI.out[[j + 12]] <- with(HSI, eval(HSI$COT))
-  HSI.out[[j + 13]] <- with(HSI, eval(HSI$CL))
-  HSI.out[[j + 14]] <- with(HSI, eval(HSI$CEL))
-  HSI.out[[j + 15]] <- with(HSI, eval(HSI$CE))
-  HSI.out[[j + 16]] <- with(HSI, eval(HSI$CJ))
-  HSI.out[[j + 17]] <- with(HSI, eval(HSI$CFr))
-  HSI.out[[j + 18]] <- with(HSI, eval(HSI$CS))
-  HSI.out[[j + 19]] <- with(HSI, eval(HSI$CA))
-  HSI.out[[j + 20]] <- with(HSI, eval(HSI$CI))
-  HSI.out[[j + 21]] <- with(HSI, eval(HSI$CNI))
-  HSI.out[[j + 22]] <- with(HSI, eval(HSI$CWFC))
-  HSI.out[[j + 23]] <- with(HSI, eval(HSI$CT))
-  HSI.out[[j + 24]] <- with(HSI, eval(HSI$CJA))
-  HSI.out[[j + 25]] <- with(HSI.out, eval(HSI.out$Eqtn))
-  HSI.out2 <- HSI.out[which(!is.na(HSI.out))]
-  HSI.out3 <- data.frame(HSI.out2)
-  if (length(SIV.model) != length(SIV)) {
-    HSI.out4 <- "SIV vector length does not match equation."
-  }
-  else {
-    HSI.out4 <- ifelse(is.numeric(HSI.out3$Eqtn), HSI.out3$Eqtn,
-                       "NA with possible SIV input error.")
-  }
-  return(HSI.out4)
+
+  # Evaluate model expressions for each component and final
+  HSI_out <- HSI
+  j <- length(SIV_var_num)
+  HSI_out[[j + 1]]  <- eval(HSI$CF, HSI)
+  HSI_out[[j + 2]]  <- eval(HSI$CC, HSI)
+  HSI_out[[j + 3]]  <- eval(HSI$CCF, HSI)
+  HSI_out[[j + 4]]  <- eval(HSI$CWF, HSI)
+  HSI_out[[j + 5]]  <- eval(HSI$CW, HSI)
+  HSI_out[[j + 6]]  <- eval(HSI$CCB, HSI)
+  HSI_out[[j + 7]]  <- eval(HSI$CCN, HSI)
+  HSI_out[[j + 8]]  <- eval(HSI$CWQ, HSI)
+  HSI_out[[j + 9]]  <- eval(HSI$CR, HSI)
+  HSI_out[[j + 10]] <- eval(HSI$CCR, HSI)
+  HSI_out[[j + 11]] <- eval(HSI$CD, HSI)
+  HSI_out[[j + 12]] <- eval(HSI$COT, HSI)
+  HSI_out[[j + 13]] <- eval(HSI$CL, HSI)
+  HSI_out[[j + 14]] <- eval(HSI$CEL, HSI)
+  HSI_out[[j + 15]] <- eval(HSI$CE, HSI)
+  HSI_out[[j + 16]] <- eval(HSI$CJ, HSI)
+  HSI_out[[j + 17]] <- eval(HSI$CFr, HSI)
+  HSI_out[[j + 18]] <- eval(HSI$CS, HSI)
+  HSI_out[[j + 19]] <- eval(HSI$CA, HSI)
+  HSI_out[[j + 20]] <- eval(HSI$CI, HSI)
+  HSI_out[[j + 21]] <- eval(HSI$CNI, HSI)
+  HSI_out[[j + 22]] <- eval(HSI$CWFC, HSI)
+  HSI_out[[j + 23]] <- eval(HSI$CT, HSI)
+  HSI_out[[j + 24]] <- eval(HSI$CJA, HSI)
+  HSI_out[[j + 25]] <- eval(HSI$Eqtn, HSI_out)
+
+  # Remove the unspecified model components
+  HSI_results <- HSI_out[which(!is.na(HSI_out))]
+
+  return(HSI_results$Eqtn)
 }
