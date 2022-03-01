@@ -35,6 +35,8 @@ HSIeqtn <- function (HSImodelname, SIV, HSImetadata) {
     stop("HSImodelname must be a character vector with a single item")}
   if(!is.data.frame(HSImetadata)) {
     stop("HSImetadata must be a data frame.")}
+  if(!(HSImodelname %in% HSImetadata$model)) {
+    stop("HSImodelname not in HSImetadata$model")}
 
   # Identify model record number
   model_index_num <- which(HSImetadata$model == HSImodelname)
