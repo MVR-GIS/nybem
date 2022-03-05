@@ -11,7 +11,8 @@ HSIeqtn(HSImodelname, SIV, HSImetadata)
 must match an existing model name in HSImetadata.}
 
 \item{SIV}{list; a vector of suitability index values used in
-the model specified in HSImodelname.}
+the model specified in HSImodelname. Must be listed
+in the same order as specified in the model.}
 
 \item{HSImetadata}{data frame; A data frame of HSI model metadata within
 the ecorest package.}
