@@ -1,0 +1,112 @@
+---
+title: "ecorest_raster_conversion"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ecorest_raster_conversion}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Converting the `ecorest` R package to handle raster input
+The purpose of this document is to evaluate the `ecorest` R package to determine the steps needed to refactor `ecorest` to support habitat suitability model metric inputs in raster format. `ecorest` was originally designed to support single-value metric inputs. The approach will be to create new refactored functions that implement raster support. 
+
+## `HSImetadata` Data Frame
+Stores HSI model functional forms. 
+
+Structure:
+* Traditional data frame in wide format. 
+* Rows represent models of a species-lifestage.
+* Columns are model attributes. 
+
+Purpose: 
+* Store model attributes to support queries and provide documentation ("model", "submodel", "species", "geography", "ecosystem", "documentation", "note", "website")
+* Store suitability metric names ("SIV1" - "SIV22")
+* Store model component equations as a character string ("CF", "CC", "CCF", "CWF", "CW", "CCB", "CCN", "CWQ", "CR", "CCR", "CD", "COT", "CL", "CEL", "CE", "CJ", "CFr", "CS", "CA", "CI", "CNI", "CWFC", "CT", "CJA")
+* Store the overall HSI model equation as a character string ("Eqtn"). This expression is commonly composed of the results of components. 
+* Provide a data structure that can be queried to facilitate model expression evaluation. 
+* Model equations stored as character strings are converted to expressions and then evaluated. 
+
+Depends:
+* Model data entry from source references. 
+
+Supports:
+* `HSIeqtn`
+
+Raster Support:
+* Check if model component equation and overall HSI model equation expressions can be evaluated with raster input. 
+
+## `HSImodels` List of Data Frames
+Stores HSI model metric and suitability index values. 
+
+Structure:
+* Named list of data frames.
+* Named list elements represent a model of a species-lifestage represented as a data frame. 
+* List element names match `HSImetedata$models`. 
+* Each model data frame contains columns of model metrics and rows representing model metric value breakpoints. 
+* Columns occur as pairs with the first element of the pair representing the metric (the value measure in the real world) and the second element represents the suitability index value (SIV, 0-1) at the metric value expressed in the matching metric column. 
+* Columns are named based on the metric that they represent. 
+* The metric suitability index column is usually suffixed with "SIV" to distinguish it from the metric column. 
+
+Purpose:
+* Store model metric names (as column names).
+* Store model metric breakpoints (as rows). 
+* Store model metric real world values (in a column with the metric name)
+* Store model metric suitability index values (in a column with the metric name suffixed with "SIV")
+* The metric column and its suitability index value column must occur in column pairs. 
+* Provide a data structure that can be queried to facilitate model evaluation. 
+
+Depends:
+* Model data entry from source references. 
+
+Supports:
+* `SIcalc`
+
+Raster Support:
+* Continuous metrics with numeric breakpoints are well suited to calculating rasters. 
+* Categorical metrics with factor breakpoints require special treatment. `raster::RasterLayer` objects set to store factors, use to integer numeric values for each level and then use a factor lookup to return the categorical class. 
+
+## `SIcalc` Function
+Converts observed metric values into suitability index (SI) values.  
+
+Purpose:
+* Converts observed metric values into suitability index values. 
+* Must be able to handle single value observations or raster observations. 
+* Must be able to calculate SI values for all of the metrics in a model. 
+
+Depends:
+* `HSImodels`
+
+Supports:
+* `HSIeqtn`
+
+Raster Support:
+* Extracting the vector of values from a raster allows the SI calculations to be handled the same as single element vector. 
+* Continuous metrics with numeric breakpoints are well suited to calculating SI values using the `stats::approx` function from rasters (after extracting a vector of values). The interpolated continuous values are then assigned back to the raster. 
+* Categorical metrics pose some challenges for raster adaptation as categorical rasters (factors) are stored as numeric and the raster attribute table stores the class name. 
+
+
+## `HSIeqtn` Function
+Calculate HSI values for a model. 
+
+Purpose: 
+
+Depends:
+* `SICalc`
+* `HSImetadata`
+
+## `HSIplotter` Function
+Visualize HSI model metric values and their suitability index values. 
+
+Purpose:
+* Visualize HSI model metric values and their suitability index values. 
+* Simplify quality assurance. 
+* Automate visualization and reporting. 
+
+Depends:
+* `HSImodels`
+
+Supports:
+* NA
+
+Raster Support:
+* NA
