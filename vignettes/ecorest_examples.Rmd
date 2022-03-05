@@ -111,6 +111,26 @@ HUcalc(ExampleOutput1[1:3,], ExampleOutput1[8,], HSImin)
 
 ```
 
+```{r}
+model_name <- "barredowl"
+
+# Identify model record number
+model_index_num <- which(ecorest::HSImetadata$model == model_name)
+
+# Barredowl observed metric values
+bo_obs <- list(1.5, 15, 50)
+bo_obs_area <- 100
+
+bo_model <- HSImodels[[model_index_num]]
+
+results <- data.frame(rep(NA, length(bo_obs) + 6))
+colnames(results) <- "Example1"
+row.names(results) <- c(colnames(bo_model)[seq(2, length.out = length(bo_obs), by = 2)], 
+                        "eqtn", "min", "arimean", "geomean", "Area", "HUs.Eqtn")
+
+```
+
+
 ## Example 2
 ```{r example-2}
 #Grab a model - store as character string

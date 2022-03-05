@@ -1,5 +1,5 @@
 ---
-title: "Using_nybem"
+title: "Using `nybem`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using_nybem}
@@ -40,5 +40,13 @@ levels(obs_wtr_regime) <- obs_wtr_regime_rat
 obs_wtr_regime
 ```
 
+```{r fig.height=3, fig.width=6.5}
+# Get americancoot HSI model record from the `ecorest`package (example of
+# continuous and categorical metrics)
+americancoot_ecorest <- ecorest::HSImodels$americancoot
+
+# Create the plot
+nybem::HSIplotter(americancoot_ecorest)
+```
 
 
