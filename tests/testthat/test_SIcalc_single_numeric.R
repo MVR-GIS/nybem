@@ -1,7 +1,6 @@
-# Build and define a matrix of the Barred Owl suitability curves
+# Define a data frame of the Barred Owl suitability curves
 # Allen A.W. 1982. Habitat Suitability Index Models: Barred owl.
-# FWS/OBS 82/10.143.
-# U.S. Fish and Wildlife Service.
+# U.S. Fish and Wildlife Service. FWS/OBS 82/10.143.
 # https://pubs.er.usgs.gov/publication/fwsobs82_10_143.
 
 # Build manual model
