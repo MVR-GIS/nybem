@@ -1,7 +1,6 @@
-# Build and define a matrix of the Barred Owl suitability curves
+# Define a data frame of the Barred Owl suitability curves
 # Allen A.W. 1982. Habitat Suitability Index Models: Barred owl.
-# FWS/OBS 82/10.143.
-# U.S. Fish and Wildlife Service.
+# U.S. Fish and Wildlife Service. FWS/OBS 82/10.143.
 # https://pubs.er.usgs.gov/publication/fwsobs82_10_143.
 
 # Build manual model
@@ -22,16 +21,19 @@ canopy_cov <- data.frame(can.cov, can.cov.SIV)
 
 barredowl <- data.frame(tree_num, tree_diameter, canopy_cov)
 
+# Get barredowl HSI model record from the `ecorest`package
+barredowl_ecorest <- ecorest::HSImodels$barredowl
+
+# Create the plot
+# HSIplotter(barredowl_ecorest)
+
 # set parameters for testing within function
 SI <- barredowl
 
-# Check output at console
-HSIplotter(barredowl)
 
-test_that("another check", {
+test_that("check plot output for continuous metrics", {
   expect_snapshot_output(HSIplotter(barredowl))
-  vdiffr::expect_doppelganger("HSI-plot-continuous",
+  expect_snapshot_output(HSIplotter(barredowl_ecorest))
+  vdiffr::expect_doppelganger("HSI-plot-barredowl-continuous",
                               fig = function() HSIplotter(barredowl))
 })
-
-snapshot_review()
