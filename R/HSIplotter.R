@@ -20,12 +20,25 @@
 #'   Habitat Suitability Index Models. Ecological Services Manual, 103.
 #'
 #' @examples
+#' # Get barredowl HSI model record from the `ecorest`package (example of
+#' # continuous metrics)
+#' barredowl_ecorest <- ecorest::HSImodels$barredowl
+#'
+#' # Create the plot
+#' HSIplotter(barredowl_ecorest)
+#'
+#' # Get americancoot HSI model record from the `ecorest`package (example of
+#' continuous and categorical metrics)
+#' americancoot_ecorest <- ecorest::HSImodels$americancoot
+#'
+#' # Create the plot
+#' HSIplotter(americancoot_ecorest)
 #'
 HSIplotter <- function (SI) {
   # Set number of metrics in the SI model (count of breakpoint-SI pairs)
   nSI <- length(colnames(SI))/2
 
-  # Set par environment
+  # Set existing par environment
   oldpar <- par("mfrow", "mgp", "mar")
   on.exit(par(oldpar))
 
@@ -33,13 +46,6 @@ HSIplotter <- function (SI) {
   par(mfrow = c(ceiling(nSI/3), 3),
       mgp = c(2, 0.5, 0),
       mar = c(3.5, 3.5, 3, 1))
-
-  # Determine which metrics are continuous
-  SI_continuous <- c()
-  for (i in 1:nSI) {
-    current_metric_column <- 2 * i - 1
-    SI_continuous[i] <- is.numeric(current_metric_column)
-  }
 
   # Create the plots
   for (i in 1:nSI) {
@@ -50,7 +56,7 @@ HSIplotter <- function (SI) {
     si_vector     <- SI[, current_si_column]
     current_metric_continuous <- is.numeric(metric_vector)
 
-    if (SI_continuous[i] == TRUE) {
+    if (current_metric_continuous == TRUE) {
       plot(metric_vector, si_vector,
            pch = 19,
            col = "black",
@@ -62,7 +68,7 @@ HSIplotter <- function (SI) {
             col = "black")
       box()
     }
-    if(SI_continuous[i] != TRUE) {
+    if(current_metric_continuous != TRUE) {
       barplot(si_vector,
               names.arg = metric_vector,
               col = "black",

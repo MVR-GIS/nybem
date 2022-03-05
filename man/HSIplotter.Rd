@@ -20,6 +20,19 @@ Plots habitat suitability index curves for all metrics in
 the model.
 }
 \examples{
+# Get barredowl HSI model record from the `ecorest`package (example of
+# continuous metrics)
+barredowl_ecorest <- ecorest::HSImodels$barredowl
+
+# Create the plot
+HSIplotter(barredowl_ecorest)
+
+# Get americancoot HSI model record from the `ecorest`package (example of
+continuous and categorical metrics)
+americancoot_ecorest <- ecorest::HSImodels$americancoot
+
+# Create the plot
+HSIplotter(americancoot_ecorest)
 
 }
 \references{
