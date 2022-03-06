@@ -27,6 +27,8 @@
 #' * US Fish and Wildlife Service. (1981). Standards for the Development of
 #'   Habitat Suitability Index Models. Ecological Services Manual, 103.
 #'
+#' @importFrom dplyr select select_if
+#'
 HSIeqtn <- function (HSImodelname, SIV, HSImetadata) {
   # Check parameters
   if(!is.character(HSImodelname)) {
@@ -44,25 +46,41 @@ HSIeqtn <- function (HSImodelname, SIV, HSImetadata) {
   # Subset HSImetadata for current model
   model <- HSImetadata[model_index_num, ]
 
-  # Extract vector of integer positions of SI variables specified in model
-  SIV_var_num <- which(!is.na(HSImetadata[model_index_num, 9:30]))
-
   # Generate a vector of the SI variable names specified in the model
-  SIV_var_names <- paste("SIV", SIV_var_num, sep = "")
+  SIV_var_names <- model %>%
+    select(9:30) %>%
+    select_if(~ !any(is.na(.))) %>%
+    names()
+
+  # Generate a vector of the component variables specified in the model
+  used_component_names <- model %>%
+    select(31:55) %>%
+    select_if(~ !any(is.na(.))) %>%
+    names()
+
+  # Generate a vector of all components
+  all_component_names <- model %>%
+    select(31:55) %>%
+    names()
 
   # Check SIV parameter matches number of specified model metrics
-  if(length(SIV_var_num) != length(na.omit(SIV))) {
+  if(length(SIV_var_names) != length(na.omit(SIV))) {
     stop("SIV vector length does not match model equation.")}
   if(any(is.na(SIV))) {
     stop("SIV vector should not contain any missing data.")}
 
-  # Create the empty HSI list of variables and components
-  model_var_names <- c(SIV_var_names, "CF", "CC", "CCF", "CWF", "CW", "CCB",
-                       "CCN", "CWQ", "CR", "CCR", "CD", "COT", "CL", "CEL",
-                       "CE", "CJ", "CFr", "CS", "CA", "CI", "CNI", "CWFC",
-                       "CT", "CJA", "Eqtn")
-  HSI <- vector("list", length = length(model_var_names))
-  names(HSI) <- model_var_names
+  # Construct the empty HSI list to hold model SI values and components
+  model_SIV_component_names <- c(SIV_var_names, all_component_names)
+  HSI <- vector("list", length = length(model_SIV_component_names))
+  names(HSI) <- model_SIV_component_names
+
+  # Check for raster SIV input
+  raster_siv <- any(sapply(SIV, is_RasterLayer))
+
+  # Assign SI variables to HSI list items
+  for (i in 1:length(SIV)) {
+    HSI[[i]] <- SIV[[i]]
+  }
 
   # Assign model component equation expressions to named HSI list items
   HSI$CF   <- parse(text = paste(model$CF))
@@ -91,14 +109,9 @@ HSIeqtn <- function (HSImodelname, SIV, HSImetadata) {
   HSI$CJA  <- parse(text = paste(model$CJA))
   HSI$Eqtn <- parse(text = paste(model$Eqtn))
 
-  # Assign SI variables to HSI list items
-  for (i in 1:length(SIV)) {
-    HSI[[i]] <- SIV[[i]]
-  }
-
-  # Evaluate model expressions for each component and final
+  # Evaluate model expressions for each component
   HSI_out <- HSI
-  j <- length(SIV_var_num)
+  j <- length(SIV_var_names)
   HSI_out[[j + 1]]  <- eval(HSI$CF, HSI)
   HSI_out[[j + 2]]  <- eval(HSI$CC, HSI)
   HSI_out[[j + 3]]  <- eval(HSI$CCF, HSI)
@@ -123,6 +136,8 @@ HSIeqtn <- function (HSImodelname, SIV, HSImetadata) {
   HSI_out[[j + 22]] <- eval(HSI$CWFC, HSI)
   HSI_out[[j + 23]] <- eval(HSI$CT, HSI)
   HSI_out[[j + 24]] <- eval(HSI$CJA, HSI)
+
+  # Calculate the final model HSI
   HSI_out[[j + 25]] <- eval(HSI$Eqtn, HSI_out)
 
   # Remove the unspecified model components

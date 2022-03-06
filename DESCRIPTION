@@ -32,4 +32,5 @@ VignetteBuilder: knitr
 Imports: 
     sp,
     ecorest,
-    raster
+    raster,
+    dplyr
