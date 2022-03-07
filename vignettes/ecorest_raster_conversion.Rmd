@@ -1,5 +1,5 @@
 ---
-title: "`ecorest` Raster Conversion"
+title: "ecorest_raster_conversion"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{ecorest_raster_conversion}
@@ -34,6 +34,19 @@ Stores HSI model functional forms.
 
 ### Raster Support
 * Check if model component equation and overall HSI model equation expressions can be evaluated with raster input. 
+* In other words, determine if SIV inputs can be either single value or raster. Do component equations support by input types?  
+* According to [`raster::Arith-methods`](https://search.r-project.org/CRAN/refmans/raster/html/Arith-methods.html), standard arithmetic operators for computations with `Raster*` objects and numeric values are: +, -, *, /, ^, %%, %/%, 
+* According to [`raster::Math-methods`](https://search.r-project.org/CRAN/refmans/raster/html/Math-methods.html), generic mathematical functions that can be used with a `Raster*` object as argument:"abs", "sign", "sqrt", "ceiling", "floor", "trunc", "cummax", "cummin", "cumprod", "cumsum", "log", "log10", "log2", "log1p", "acos", "acosh", "asin", "asinh", "atan", "atanh", "exp", "expm1", "cos", "cosh", "sin", "sinh", "tan", "tanh"
+* However, this does not appear to be complete list. Several functions not on this list appear to correctly handle `Raster*` inputs (e.g., "min", "max", "ifelse"). 
+* According to `raster::Logic-methods` the following logical (boolean) operators are available for computations with `Raster*` objects: &, |, and !. 
+* The model equations routinely use functions not in the list, primarily <, >, >=, <=, ==. When logical operators are used with rasters, a raster object containing TRUE/FALSE is returned, but most functions (i.e., "ifelse") expect a single logical, throwing an error. 
+* Therefore, raster-safe versions of functions will need to be created. 
+* A raster-safe `nybem::ifelse` has been created as a replacement for `base::ifelse` that seems to be working. 
+* As an alternative to direct arithmetic and math support for rasters discussed above, the functions`raster::calc` (single raster input) and `raster::overlay` (multiple raster input) could be used. 
+* `calc` and `overlay` have enhanced support for large rasters. However, raster math seems to be working efficiently (i.e., all layers can easily be stored in memory) for large study areas (e.g., NJ extent with 30m pixel resolution). 
+* If raster math cannot be used, `HSIeqtn` will need to be adapted to deferentially handle single-value SIV input using the existing method and rasters using the `calc` or `overlay` method. However, preparing input for `calc` and `overlay` will require a complete rewrite of expression evaluation in `HSIeqtn`. 
+* Determine if HSI equations originally designed for single-value input even make sense when raster input is provided. Are the existing equations valid for rasters? Do they need to be adapted? 
+* For example, the equation "ifelse(CA < CL, CA, (CL * CA)^(1/2))", evaluated in the raster case would result in a raster with areas where CA < CL being equal to CA, while CA !< CL will equal (CL * CA)^(1/2). Is that what is expected under the spirit of the original HSI? 
 
 
 ## List of Data Frames: `HSImodels` 
