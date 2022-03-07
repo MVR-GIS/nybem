@@ -1,0 +1,45 @@
+---
+title: "Create hsi_metadata"
+output: html
+---
+
+
+```{r setup}
+library(nybem)
+library(ecorest)
+library(usethis)
+```
+
+
+## Import `ecorest::HSImetadata`
+Testing of the `ecorest::HSImetadata` data frame has identified some errors in the expressions in the `Eqtn` column. To supported further refinement of `ecorest` functions in the `nybem` package, a new `hsi_metadata` data object will be created to fix identified errors. 
+
+```{r}
+hsi_metadata <- ecorest::HSImetadata
+```
+
+### Fix `Eqtn` mistakes
+```{r}
+hsi_metadata$Eqtn <- as.character(hsi_metadata$Eqtn)
+```
+
+```{r}
+# Make corrections
+hsi_metadata[40, "Eqtn"] <- "ifelse(CWQ | CR <= 0.4, min(CWQ, CR, ((CCF * CWQ * (CR)^(2))^(1/4))), ((CCF * CWQ * (CR)^(2))^(1/4)))"
+hsi_metadata[41, "Eqtn"] <- "ifelse(CWQ | CR <= 0.4, min(CWQ, CR, ((CCF * CWQ * (CR)^(2))^(1/4))), ((CCF * CWQ * (CR)^(2))^(1/4)))"
+hsi_metadata[45, "Eqtn"] <- "min((SIV1*SIV2*SIV3)^(1/3), SIV4)"
+```
+
+
+
+
+
+```{r}
+hsi_metadata$Eqtn <- factor(hsi_metadata$Eqtn)
+```
+
+```{r}
+usethis::use_data(hsi_metadata, overwrite = TRUE)
+```
+
+
