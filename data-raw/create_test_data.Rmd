@@ -3,11 +3,9 @@ title: "Create test data"
 output: html
 ---
 
-## Managing raster data in R
-
 ```{r install, eval=FALSE}
 # install dev version of FedData for latest functionality
-remotes::install_github("ropensci/FedData")
+# remotes::install_github("ropensci/FedData")
 
 # if install_github fails, clone and install from local clone
 ```
@@ -23,6 +21,8 @@ library(tmap)
 library(grDevices)
 library(usethis)
 ```
+
+## Managing raster data in R
 
 ```{r set-project-crs}
 # Set study area coordinate system for NJ-NY
