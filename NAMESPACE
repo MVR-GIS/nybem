@@ -3,6 +3,7 @@
 export(HSIeqtn)
 export(HSIplotter)
 export(SIcalc)
+export(ifelse)
 export(is_RasterLayer)
 importFrom(dplyr,select)
 importFrom(dplyr,select_if)
