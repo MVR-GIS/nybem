@@ -10,7 +10,9 @@ ifelse(condition, true_value, false_value)
 \item{condition}{raster or numeric; an expression that results in a
 boolean, matching the type of the condition.}
 
-\item{false_value}{}
+\item{true_value}{raster, constant; Input true raster or constant value.}
+
+\item{false_value}{raster, constant; Input false raster or constant value.}
 }
 \value{
 the true or false value matching the data type of the condition.

@@ -7,8 +7,8 @@
 #' @export
 #' @param condition     raster or numeric; an expression that results in a
 #'                      boolean, matching the type of the condition.
-#' @param true_value
-#' @param false_value
+#' @param true_value    raster, constant; Input true raster or constant value.
+#' @param false_value   raster, constant; Input false raster or constant value.
 #'
 #' @return the true or false value matching the data type of the condition.
 #'
