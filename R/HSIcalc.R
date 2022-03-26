@@ -11,6 +11,8 @@
 #' @return An HSI object matching the data format of the input suitability
 #'   indices.
 #'
+#' @importFrom raster brick calc
+#'
 HSIcalc <- function(si_list, method = "mean") {
   # si_list parameter must be list to preserve metric data type
   if(!is.list(si_list)) {stop("si_list must be a list")}
