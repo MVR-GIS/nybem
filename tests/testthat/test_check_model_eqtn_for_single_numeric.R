@@ -1,5 +1,5 @@
 # Get HSI models
-hsi_metadata <- nybem::hsi_metadata
+hsi_metadata <- nybem::hsi_metadata[1:30, ]
 num_of_models <- length(hsi_metadata$model)
 
 # Identify HSI variables required for evaluation
@@ -19,7 +19,7 @@ test_that("check if model Eqtn can handle single numeric", {
     # Calculate HSI
     hsi_result <- eval(parse(text = paste(model$Eqtn)), SIV_single_numeric)
 
-    print(paste("Model: ",current_model_num))
+    # print(paste("Model: ",current_model_num))
 
     expect_true(is.numeric(hsi_result))
   }
