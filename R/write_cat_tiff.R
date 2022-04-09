@@ -26,6 +26,7 @@ write_cat_tif <- function(cat_raster, out_dir, out_name) {
   out_clr <- file.path(out_dir, paste0(out_name, ".tif.vat.cpg"))
 
   # Save the raster
+  # https://gdal.org/drivers/raster/gtiff.html
   raster::writeRaster(cat_raster,
                       filename = out_tif,
                       format = "GTiff",
