@@ -42,15 +42,19 @@ set_tidal_zone <- function(bed_elevation, MLLW, MHHW) {
   # Create a new `value` column
   tidal_zone_rat$value <- tidal_zone_rat$ID
 
-  # Create a new column to hold the factor labels
-  class_labels <- c("Deep", "Subtidal", "Intertidal", "Upland")
-  tidal_zone_rat$label <- class_labels
+  # Assign factor labels
+  class_labels <- data.frame("ID" = c(1, 2, 3, 4),
+                             "labels" = c("Deep", "Subtidal",
+                                          "Intertidal", "Upland"))
+  tidal_zone_rat <- dplyr::left_join(tidal_zone_rat,
+                                     class_labels,
+                                     by = "ID")
 
   # Use this data frame to set the levels of the raster attribute table
   levels(tidal_zone) <- tidal_zone_rat
 
   # Set the raster legend attributes
-  tidal_zone@legend@names <- c("NoData", class_labels)
+  tidal_zone@legend@names <- c("NoData", class_labels$labels)
   # https://colorbrewer2.org/#type=qualitative&scheme=Paired&n=4
   tidal_zone@legend@colortable <- c("#00000000",                  # No Data
                                     "#1f78b4",                    # Deep
