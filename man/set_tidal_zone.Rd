@@ -16,7 +16,7 @@ raster.}
 raster.}
 }
 \value{
-A categorical RasterLayer where:
+A tidal zone categorical RasterLayer where:
 \enumerate{
 \item Deep
 \item Subtidal

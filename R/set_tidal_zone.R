@@ -12,7 +12,7 @@
 #' @details The z-values of all input rasters must be expressed in the same
 #' vertical datum (i.e., National Tidal Datum Epoch, NAVD88).
 #'
-#' @return A categorical RasterLayer where:
+#' @return A tidal zone categorical RasterLayer where:
 #'  1. Deep
 #'  2. Subtidal
 #'  3. Intertidal
