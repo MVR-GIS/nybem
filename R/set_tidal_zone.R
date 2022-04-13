@@ -19,6 +19,7 @@
 #'  4. Upland
 #'
 #' @importFrom raster raster ratify levels
+#' @importFrom dplyr left_join
 #'
 set_tidal_zone <- function(bed_elevation, MLLW, MHHW) {
   # Check inputs

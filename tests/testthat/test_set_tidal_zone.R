@@ -25,6 +25,11 @@ test_that("check zone values", {
   expect_equal(values(zone_4), c(4, 4, 4, 4))
 })
 
+test_that("check data type", {
+  expect_true(is_RasterLayer(zone_1))
+  expect_true(raster::is.factor(zone_1))
+})
+
 test_that("check errrors", {
   expect_error(set_tidal_zone(elev_0, elev_1, 2))
   expect_error(set_tidal_zone(elev_0, 1, elev_2))
