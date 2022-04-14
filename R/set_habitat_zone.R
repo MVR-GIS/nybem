@@ -58,7 +58,7 @@ set_habitat_zone <- function(tidal_zone, salinity_zone) {
   levels(habitat_zone) <- habitat_zone_rat
 
   # Set the raster legend attributes
-  habitat_zone@legend@names <- c("NoData", class_labels)
+  habitat_zone@legend@names <- c("NoData", class_labels$labels)
   # https://colorbrewer2.org/#type=diverging&scheme=PRGn&n=7
   habitat_zone@legend@colortable <- c("#00000000", "#CCD1D1",
                                       "#762a83", "#af8dc3",

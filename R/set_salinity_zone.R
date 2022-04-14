@@ -56,7 +56,7 @@ set_salinity_zone <- function(salinity,
   levels(salinity_zone) <- salinity_zone_rat
 
   # Set the raster legend attributes
-  salinity_zone@legend@names <- c("NoData", class_labels)
+  salinity_zone@legend@names <- c("NoData", class_labels$labels)
   # https://colorbrewer2.org/#type=diverging&scheme=BrBG&n=4
   salinity_zone@legend@colortable <- c("#00000000",
                                        "#018571", "#80cdc1", "#dfc27d")
