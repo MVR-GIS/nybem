@@ -18,8 +18,6 @@
 #' [What is the equivalent of arcpy "Con" in QGIS and/or R
 #' raster-package?](https://gis.stackexchange.com/questions/69734/)
 #'
-#' @examples
-#'
 ifelse <- function(condition, true_value, false_value) {
   return(condition * true_value + (!condition) * false_value)
 }

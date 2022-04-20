@@ -3,7 +3,7 @@
 #' @export
 #' @description Determines if a RasterLayer has a valid colortable defined.
 #'
-#' @param raster
+#' @param raster RasterLayer; The raster to be tested.
 #'
 #' @return Returns TRUE if the raster has a valid colortable.
 #'

@@ -7,7 +7,7 @@
 has_colortable(raster)
 }
 \arguments{
-\item{raster}{}
+\item{raster}{RasterLayer; The raster to be tested.}
 }
 \value{
 Returns TRUE if the raster has a valid colortable.

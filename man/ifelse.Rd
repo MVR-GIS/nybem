@@ -28,6 +28,3 @@ This function was proposed by
 gis.stackexchange way back in 2013,
 \href{https://gis.stackexchange.com/questions/69734/}{What is the equivalent of arcpy "Con" in QGIS and/or R raster-package?}
 }
-\examples{
-
-}
