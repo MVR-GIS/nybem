@@ -13,7 +13,7 @@ An `R` package for performing coastal habitat modeling.
 and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.3-orange.svg?style=flat-square)](commits/master)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--04--09-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--04--20-yellowgreen.svg)](/commits/master)
 [![Licence](https://img.shields.io/badge/licence-CC0-blue.svg)](http://choosealicense.com/licenses/cc0-1.0/)
 
 ## Description
@@ -53,6 +53,8 @@ Check out the [NEWS](NEWS.md) for details on the latest updates.
 -   [Kyle McKay](mailto:Kyle.McKay@usace.army.mil), Research Civil
     Engineer, Engineer Research and Development Center, Environmental
     Laboratory, U.S. Army Corps of Engineers
+    <a itemprop="sameAs" content="https://orcid.org/0000-0003-2703-3841" href="https://orcid.org/0000-0002-1465-5927" target="orcid.widget" rel="me noopener noreferrer" style="vertical-align:top;">
+    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon">https://orcid.org/0000-0003-2703-3841</a>
 
 ------------------------------------------------------------------------
 
