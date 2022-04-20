@@ -34,6 +34,8 @@
 #' # Create the plot
 #' HSIplotter(americancoot_ecorest)
 #'
+#' @importFrom graphics par lines box barplot
+#'
 HSIplotter <- function (SI) {
   # Set number of metrics in the SI model (count of breakpoint-SI pairs)
   nSI <- length(colnames(SI))/2

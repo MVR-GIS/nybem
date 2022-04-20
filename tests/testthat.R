@@ -5,5 +5,6 @@ library(ecorest)
 library(raster)
 library(dplyr)
 library(tmap)
+library(rgdal)
 
 test_check("nybem")

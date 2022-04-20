@@ -33,4 +33,6 @@ Imports:
     sp,
     ecorest,
     raster,
-    dplyr
+    dplyr, 
+    foreign,
+    tmap

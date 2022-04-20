@@ -10,6 +10,8 @@
 #'
 #' @details Follows the advice from [SO](https://stackoverflow.com/questions/13289009/check-if-character-string-is-a-valid-color-representation)
 #'
+#' @importFrom grDevices col2rgb
+#'
 are_colors <- function(color_vector) {
   sapply(color_vector,
          function(X) {tryCatch(is.matrix(col2rgb(X)),
