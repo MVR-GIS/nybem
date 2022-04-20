@@ -15,6 +15,7 @@ library(usethis)
 Testing of the `ecorest::HSImetadata` data frame has identified some errors in the expressions in the `Eqtn` column. To supported further refinement of `ecorest` functions in the `nybem` package, a new `hsi_metadata` data object will be created to fix identified errors. 
 
 ```{r}
+dummy <- 1
 hsi_metadata <- ecorest::HSImetadata
 ```
 
