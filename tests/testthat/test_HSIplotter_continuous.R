@@ -25,7 +25,7 @@ barredowl <- data.frame(tree_num, tree_diameter, canopy_cov)
 barredowl_ecorest <- ecorest::HSImodels$barredowl
 
 # Create the plot
-# HSIplotter(barredowl_ecorest)
+HSIplotter(barredowl_ecorest)
 
 # set parameters for testing within function
 SI <- barredowl
@@ -36,4 +36,9 @@ test_that("check plot output for continuous metrics", {
   expect_snapshot_output(HSIplotter(barredowl_ecorest))
   vdiffr::expect_doppelganger("HSI-plot-barredowl-continuous",
                               fig = function() HSIplotter(barredowl))
+})
+
+test_that("check errors", {
+  expect_error(HSIplotter(HSIplotter(barredowl), xlab = c("1")))
+  expect_error(HSIplotter(HSIplotter(barredowl), ylab = c("1")))
 })
