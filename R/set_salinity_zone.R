@@ -30,10 +30,10 @@ set_salinity_zone <- function(salinity,
     stop("`fresh_estuarine_break` must be numeric")}
 
   #Assign salinity zone
-  salinity_zone <- ifelse(salinity >= estuarine_marine_break, 1,
+  salinity_zone <- ifelse(salinity >= estuarine_marine_break, 1,     # Marine
                    ifelse(salinity <  estuarine_marine_break &
-                          salinity >= fresh_estuarine_break, 2,
-                   ifelse(salinity <  fresh_estuarine_break, 3, 0)))
+                          salinity >= fresh_estuarine_break, 2,      # Estuarine
+                   ifelse(salinity <  fresh_estuarine_break, 3, 0))) # Fresh
 
   ## Assign factor labels
   # Convert the raster to a factor and create a blank raster attribute table
