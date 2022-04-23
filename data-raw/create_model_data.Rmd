@@ -196,8 +196,9 @@ nybem_submodels <- list(
 )
 ```
 
+# Save data to package
 ```{r}
-
+usethis::use_data(nybem_submodels)
 ```
 
 

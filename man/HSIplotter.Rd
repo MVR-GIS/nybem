@@ -4,13 +4,21 @@
 \alias{HSIplotter}
 \title{Plots habitat suitability index curves}
 \usage{
-HSIplotter(SI)
+HSIplotter(SI, xlab = NA, ylab = NA, ncol = 2)
 }
 \arguments{
-\item{SI}{matrix; matrix of suitability curves ordered as
-parameter breakpoints and associated suitability
+\item{SI}{data frame; A data frame of suitability curves ordered
+as parameter breakpoints and associated suitability
 indices for each parameter with appropriate column
 names.}
+
+\item{xlab}{character; A vector of x-axis label values for each SI.
+Defaults to SI variable name.}
+
+\item{ylab}{character; A vector of y-axis label values for each SI.
+Defaults to "Suitability Index".}
+
+\item{ncol}{numeric; Number of columns in the plot.}
 }
 \value{
 A multipanel figure displaying suitability curves.
