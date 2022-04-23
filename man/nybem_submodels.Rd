@@ -8,15 +8,25 @@
 A list with the following named submodels:
 \itemize{
 \item NYBEM.fresh.tid - Freshwater, Tidal Zone model.
+\item NYBEM.fresh.tid_labels - Freshwater, Tidal Zone labels.
 \item NYBEM.est.int - Estuarine, Intertidal Zone model.
+\item NYBEM.est.int_labels - Estuarine, Intertidal Zone labels.
 \item NYBEM.est.sub.hard - Estuarine, Subtidal Zone, Hard Bottom model.
+\item NYBEM.est.sub.hard_labels - Estuarine, Subtidal Zone, Hard Bottom labels.
 \item NYBEM.est.sub.soft.sav - Estuarine, Subtidal Zone, Soft Bottom, Submersed
 Aquatic Vegetation model.
+\item NYBEM.est.sub.soft.sav_labels - Estuarine, Subtidal Zone, Soft Bottom,
+Submersed Aquatic Vegetation labels.
 \item NYBEM.est.sub.soft.clam - Estuarine, Subtidal Zone, Soft Bottom, Hard
 Clam model.
+\item NYBEM.est.sub.soft.clam_labels - Estuarine, Subtidal Zone, Soft Bottom,
+Hard Clam labels.
 \item NYBEM.mar.int - Marine, Intertidal Zone model.
+\item NYBEM.mar.int_labels - Marine, Intertidal Zone labels.
 \item NYBEM.mar.sub - Marine, Subtidal Zone model.
+\item NYBEM.mar.sub_labels - Marine, Subtidal Zone labels.
 \item NYBEM.mar.deep - Marine, Deepwater Zone model.
+\item NYBEM.mar.deep_labels - Marine, Deepwater Zone labels.
 }
 }
 \usage{
