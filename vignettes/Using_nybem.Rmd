@@ -2,51 +2,57 @@
 title: "Using `nybem`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using_nybem}
+  %\VignetteIndexEntry{Using `nybem`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+## Getting Started
+To install the `nybem` package, install from GitHub using the `remotes` package:
+```{r install, eval=FALSE}
+remotes::install_github(repo = "MVR-GIS/nybem")
+```
 
-
+## Load Required Packages
 ```{r}
+library(nybem)
 library(raster)
 ```
 
-## Working With Categorical Rasters
-The purpose of this step is to demonstrate how to properly build a categorical raster for use in creating an input metric to calculate a suitability index. 
-
+## List the NYBEM Models
+The `nybem` package contains the models created for the ecological modeling section of the NTBEM feasibility study. Notice that the `nybem::nybem_submodels` list contains a pair of data frames for each submodel in the study. Each pair of dataframes is named for the submodel it represents (i.e., `NYBEM.fresh.tid` = Freshwater Tidal Zone habitat model). The first data frame contains the habitat variables and their matching suitability index values, while the second data frame (`*_labels`) contains the labels used in plotting.  
 ```{r}
-# Create raster categorical metric for testing: wat.regime
-obs_wtr_regime <- raster::raster(ncol = 3, nrow = 3)
+# Load the model data
+nybem_submodels <- nybem::nybem_submodels
 
-# Assign integer values 1-6 to represent the 6 water regimes 
-obs_wtr_regime <- raster::setValues(obs_wtr_regime,
-                                    rep_len(1:6, 
-                                            raster::ncell(obs_wtr_regime)))
-
-# Convert the raster to a factor and create a blank raster attribute table
-obs_wtr_regime <- raster::ratify(obs_wtr_regime)
-
-# Extract the raster factor levels and write to a new data frame
-obs_wtr_regime_rat <- levels(obs_wtr_regime)[[1]]
-
-# Create a new column to hold the factor labels
-obs_wtr_regime_rat$class <- c("a", "b", "c", "d", "e", "f")
-
-# Use this data frame to set the levels of the raster attribute table
-levels(obs_wtr_regime) <- obs_wtr_regime_rat
-
-obs_wtr_regime
+# View the available submodels
+names(nybem_submodels)
 ```
 
-```{r fig.height=3, fig.width=6.5}
-# Get americancoot HSI model record from the `ecorest`package (example of
-# continuous and categorical metrics)
-americancoot_ecorest <- ecorest::HSImodels$americancoot
-
-# Create the plot
-nybem::HSIplotter(americancoot_ecorest)
+## View the Suitability Index data frame 
+```{r}
+# View the Freshwater Tidal model
+# View table of habitat variables and their suitability index values 
+nybem_submodels$NYBEM.fresh.tid
 ```
 
+## View the Suitability Index model labels
+```{r}
+nybem_submodels$NYBEM.fresh.tid_labels
+```
+
+## Plot the Suitability Index Values
+```{r fig.width=6, fig.height=6}
+# Freshwater, Tidal
+nybem::HSIplotter(nybem_submodels$NYBEM.fresh.tid,
+                  xlab = nybem_submodels$NYBEM.fresh.tid_labels$label,
+                  ylab = nybem_submodels$NYBEM.fresh.tid_labels$variable)
+```
+
+```{r fig.width=6, fig.height=6}
+# Estuarine, Subtidal, Soft Bottom, Submersed Aquatic Vegetation
+nybem::HSIplotter(nybem_submodels$NYBEM.est.sub.soft.sav,
+                  xlab = nybem_submodels$NYBEM.est.sub.soft.sav_labels$label,
+                  ylab = nybem_submodels$NYBEM.est.sub.soft.sav_labels$variable)
+```
 
