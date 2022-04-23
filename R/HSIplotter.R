@@ -46,9 +46,9 @@ HSIplotter <- function (SI, xlab = NA,  ylab = NA, ncol = 2) {
   nSI <- length(colnames(SI))/2
 
   # Check inputs
-  if(!is.na(xlab) & nSI != length(xlab)) {
+  if(all(!is.na(xlab) & nSI != length(xlab))) {
     stop("xlab must match number of suitability index items")}
-  if(!is.na(ylab) & nSI != length(ylab)) {
+  if(all(!is.na(ylab) & nSI != length(ylab))) {
     stop("ylab must match number of suitability index items")}
 
   # Set existing par environment
