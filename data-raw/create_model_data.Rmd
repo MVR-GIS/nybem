@@ -22,6 +22,7 @@ NYBEM.fresh.tid <- data.frame(
 
 # Create model labels
 NYBEM.fresh.tid_labels <- data.frame(
+  model = "Freshwater, Tidal",
   label = c("Salinity duration (% time > 0.5 psu)", "Vegetation Cover (%)", 
             "Relative Depth"),
   variable = c("salinity", "veg.cover", "deposition")
@@ -52,6 +53,7 @@ NYBEM.est.int <- data.frame(
 
 # Create model labels
 NYBEM.est.int_labels <- data.frame(
+  model = "Estuarine, Intertidal", 
   labels = c("% Change in Velocity from Existing", "Vegetation Cover (%)",
               "Relative Depth", "Developed Area Within 100m (%)",
               "Distance to Armored Shoreline (m)"),
@@ -81,6 +83,7 @@ NYBEM.est.sub.hard <- data.frame(
 
 # Create model labels
 NYBEM.est.sub.hard_labels <- data.frame(
+  model = "Estuarine, Subtidal, Hard Bottom", 
   label = c("Hard Substrate (%)", "Minimum Annual Salinity (psu)", 
              "Annual Mean Salinity (psu)"),
   variable = c("cultch", "MAS", "AS")
@@ -107,6 +110,7 @@ NYBEM.est.sub.soft.sav <- data.frame(
 
 # Create model labels
 NYBEM.est.sub.soft.sav_labels <- data.frame(
+  model = "Estuarine, Subtidal, Soft Bottom, Submersed Aquatic Vegetation", 
   label = c("Fine Substrate Composition (%)", "Light Available (%)",
             "Vessel Usage (tracks/year)"),
   variable = c("substrate.sav", "light.PLA", 
@@ -135,6 +139,7 @@ NYBEM.est.sub.soft.clam <- data.frame(
 
 # Create model labels
 NYBEM.est.sub.soft.clam_labels <- data.frame(
+  model = "Estuarine, Subtidal, Soft Bottom, Hard Clam", 
   label = c("Salinity (psu)", "Sand Composition (%)", 
             "SAV Index"),
   variable = c("salinity.clam", "substrate.clam.sand", 
@@ -166,6 +171,7 @@ NYBEM.mar.int <- data.frame(
 
 # Create model labels
 NYBEM.mar.int_labels <- data.frame(
+  model = "Marine, Intertidal", 
   label = c("Intertidal Zone Slope (%)", "Relative exposure duration (trel)", 
             "Developed Area Within 100m (%)", "Vegetation Cover (%)",
             "Distance to Armored Shoreline (m)"),
@@ -197,6 +203,7 @@ NYBEM.mar.sub <- data.frame(
 
 # Create model labels
 NYBEM.mar.sub_labels <- data.frame(
+  model = "Marine, Subtidal",
   label = c("Velocity (m)", "Fine Substrate Composition (% fines)", 
             "Percent of Light Available (%)", "Vessel Usage (tracks/year)"),
   variable = c("velocity", "substrate.fines",
@@ -226,6 +233,7 @@ NYBEM.mar.deep <- data.frame(
 
 # Create model labels
 NYBEM.mar.deep_labels <- data.frame(
+  model = "Marine, Deepwater", 
   label = c("% Time Salinity < 30 psu", "Change in Low Velocity (%)", 
             "Light Penetration (% Reaching Bottom)", "Vessel Usage (tracks/year)"),
   variable = c("salinity.low.dur", "velocity.low.change", 
