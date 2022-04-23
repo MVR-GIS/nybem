@@ -1,0 +1,203 @@
+---
+title: "Create Model Data"
+output: html
+---
+
+# Introduction  
+The purpose of this document is to create a data frame to store the habitat model suitability index values for each model in the NYBEM feasibility study. 
+
+# Define Suitability Index Values for each Submodel
+
+## Freshwater Tidal
+```{r}
+NYBEM.fresh.tid <- data.frame(
+  salinity.per   = c(0, 20, 100),
+  salinity.SIV   = c(0, 1,  1),
+  veg.cover.per  = c(50, 57,  100),
+  veg.cover.SIV  = c(0,  0.5, 1),
+  deposition     = c(0, 1, NA),
+  deposition.SIV = c(1, 0, NA)
+)
+```
+
+```{r fig.width=4, fig.height=4}
+xlab <- c("Salinity duration (% time > 0.5 psu)", "Vegetation Cover (%)", 
+          "Relative Depth")
+ylab <- c("salinity", "veg.cover", "deposition")
+HSIplotter(NYBEM.fresh.tid, xlab, ylab)
+```
+
+## Estuarine Intertidal
+```{r}
+NYBEM.est.int <- data.frame(
+  erosion        = c(-50, 10, 50),
+  erosion.SIV    = c(1,   1,  0),
+  veg.cover.per  = c(0,   100, NA),
+  veg.cover.SIV  = c(0.1, 1,   NA),
+  deposition     = c(0, 1, NA),
+  deposition.SIV = c(1, 0, NA),
+  land.use.per   = c(0, 50, 100),
+  land.use.SIV   = c(1, 1,  0),
+  shoreline.m    = c(0,   100, 500),
+  shoreline.SIV  = c(0.5, 1,   1)
+)
+```
+
+```{r fig.width=4, fig.height=6}
+xlab <- c("% Change in Velocity from Existing", "Vegetation Cover (%)",
+          "Relative Depth", "Developed Area Within 100m (%)",
+          "Distance to Armored Shoreline (m)")
+ylab <- c("erosion", "veg.cover", 
+          "deposition", "land.use",
+          "shoreline")
+HSIplotter(NYBEM.est.int, xlab, ylab)
+```
+
+## Estuarine Subtidal - Hard
+```{r}
+NYBEM.est.sub.hard <- data.frame(
+  cultch     = c(0, 100, NA, NA, NA, NA, NA, NA),
+  cultch.SIV = c(0, 1,   NA, NA, NA, NA, NA, NA),
+  MAS        = c(0, 2, 4,    6,   8, 40, NA, NA),
+  MAS.SIV    = c(0, 0, 0.05, 0.5, 1, 1,  NA, NA),
+  AS         = c(0, 5, 10, 15, 20,  25,  30,  40),
+  AS.SIV     = c(0, 0, 1,  1,  0.6, 0.25, 0.1, 0)
+)
+```
+
+```{r fig.width=4, fig.height=4}
+xlab <- c("Hard Substrate (%)", "Minimum Annual Salinity (psu)", 
+          "Annual Mean Salinity (psu)")
+ylab <- c("cultch", "MAS", "AS")
+HSIplotter(NYBEM.est.sub.hard, xlab, ylab)
+```
+
+## Estuarine Subtidal - Soft, SAV
+```{r}
+NYBEM.est.sub.soft.sav <- data.frame(
+  substrate.sav      = c(0, 70, 100, NA),
+  substrate.sav.SIV  = c(1, 1,  0,   NA),
+  light.PLA          = c(0, 10, 22, NA),
+  light.SIV          = c(0, 0,  1,  NA),
+  vessel.density     = c(0, 1000, 10000, NA),
+  vessel.density.SIV = c(1, 1,    0.1,   NA)
+)
+```
+
+```{r fig.width=4, fig.height=4}
+xlab <- c("Fine Substrate Composition (%)", "Light Available (%)",
+          "Vessel Usage (tracks/year)")
+ylab <- c("substrate.sav", "light.PLA", 
+          "vessel.density")
+HSIplotter(NYBEM.est.sub.soft.sav, xlab, ylab)
+```
+
+## Estuarine Subtidal - Soft, Clam
+```{r}
+NYBEM.est.sub.soft.clam <- data.frame(
+  salinity.clam       = c(0, 12, 12.5, 20,  25, 35, 45),
+  salinity.clam.SIV   = c(0, 0,  0.25, 0.5, 1,  1,  0),
+  substrate.clam.sand = c(0, 30,   70,   100, NA, NA, NA),
+  substrate.clam.SIV  = c(0, 0.25, 0.75, 1,   NA, NA, NA),
+  Isav                = c(0, 0.2, 0.8, 1, NA, NA, NA),
+  Isav.SIV            = c(1, 1,   0,   0, NA, NA, NA)
+)
+```
+
+```{r fig.width=4, fig.height=4}
+xlab <- c("Salinity (psu)", "Sand Composition (%)", 
+          "SAV Index")
+ylab <- c("salinity.clam", "substrate.clam.sand", 
+          "Isav")
+HSIplotter(NYBEM.est.sub.soft.clam, xlab, ylab)
+```
+
+## Marine Intertidal
+```{r}
+NYBEM.mar.int <- data.frame(
+  beach.slope.per = c(0, 10, 30),
+  beach.slope.SIV = c(1, 1,  0),
+  trel            = c(0, 50, 100),
+  exp.dur.SIV     = c(0, 1,  0),
+  land.use.per    = c(0, 10, 100),
+  land.use.SIV    = c(1, 1,  0),
+  veg.cover.per   = c(0, 40, 100),
+  veg.cover.SIV   = c(1, 1,  0),
+  shoreline.m     = c(0, 100, 500),
+  shoreline.SIV   = c(0, 1,   1)
+)
+```
+
+```{r fig.width=4, fig.height=6}
+xlab <- c("Intertidal Zone Slope (%)", "Relative exposure duration (trel)", 
+          "Developed Area Within 100m (%)", "Vegetation Cover (%)",
+          "Distance to Armored Shoreline (m)")
+ylab <- c("beach.slope", "exp.dur",
+          "land.use", "veg.cover",
+          "shoreline")
+HSIplotter(NYBEM.mar.int, xlab, ylab)
+```
+
+## Marine Subtidal
+```{r}
+NYBEM.mar.sub <- data.frame(
+  velocity           = c(0,   25, 50, 100),
+  velocity.SIV       = c(0.6, 1,  1,  0),
+  substrate.fines    = c(0, 100, NA, NA),
+  substrate.SIV      = c(1, 0,   NA, NA),
+  light.PLW          = c(0, 10, 22, 100),
+  light.SIV          = c(0, 0,  1,  1),
+  vessel.density     = c(0, 1000, 10000, NA),
+  vessel.density.SIV = c(1, 1,    0.1,   NA)
+)
+```
+
+```{r fig.width=4, fig.height=4}
+xlab <- c("Velocity (m)", "Fine Substrate Composition (% fines)", 
+          "Percent of Light Available (%)", "Vessel Usage (tracks/year)")
+ylab <- c("velocity", "substrate.fines",
+          "light", "vessel.density")
+HSIplotter(NYBEM.mar.sub, xlab, ylab)
+```
+
+## Marine Deep
+```{r}
+NYBEM.mar.deep <- data.frame(
+  salinity.low.dur    = c(0, 50, 100, NA),
+  salinity.low.SIV    = c(1, 0,  0,   NA),
+  velocity.low.change = c(-100, -10, 10, 100),
+  velocity.low.SIV    = c(0,    1,   1,  0.8),
+  light.PLW           = c(0, 10, 22, 100),
+  light.SIV           = c(0, 0,  1,  1),
+  vessel.density      = c(0, 1000, 10000, NA),
+  vessel.density.SIV  = c(1, 1,    0.1,   NA)
+)
+```
+
+```{r fig.width=4, fig.height=4}
+xlab <- c("% Time Salinity < 30 psu", "Change in Low Velocity (%)", 
+          "Light Penetration (% Reaching Bottom)", "Vessel Usage (tracks/year)")
+ylab <- c("salinity.low.dur", "velocity.low.change", 
+          "substrate.fines", "vessel.density")
+HSIplotter(NYBEM.mar.deep, xlab, ylab)
+```
+
+# Combine Submodels into List
+```{r}
+nybem_submodels <- list(
+  NYBEM.fresh.tid         = NYBEM.fresh.tid,
+  NYBEM.est.int           = NYBEM.est.int,
+  NYBEM.est.sub.hard      = NYBEM.est.sub.hard,
+  NYBEM.est.sub.soft.sav  = NYBEM.est.sub.soft.sav,
+  NYBEM.est.sub.soft.clam = NYBEM.est.sub.soft.clam,
+  NYBEM.mar.int           = NYBEM.mar.int,
+  NYBEM.mar.sub           = NYBEM.mar.sub,
+  NYBEM.mar.deep          = NYBEM.mar.deep
+)
+```
+
+```{r}
+
+```
+
+
