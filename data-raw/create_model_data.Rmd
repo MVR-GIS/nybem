@@ -1,6 +1,6 @@
 ---
 title: "Create Model Data"
-output: html
+output: html_document
 ---
 
 # Introduction  
@@ -29,8 +29,8 @@ NYBEM.fresh.tid_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=4}
-HSIplotter(NYBEM.fresh.tid, 
+```{r fig.width=6, fig.height=6}
+nybem::HSIplotter(NYBEM.fresh.tid, 
            xlab = NYBEM.fresh.tid_labels$label, 
            ylab = NYBEM.fresh.tid_labels$variable)
 ```
@@ -63,8 +63,8 @@ NYBEM.est.int_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=6}
-HSIplotter(NYBEM.est.int, 
+```{r fig.width=6, fig.height=9}
+nybem::HSIplotter(NYBEM.est.int, 
            xlab = NYBEM.est.int_labels$labels, 
            ylab = NYBEM.est.int_labels$variable)
 ```
@@ -90,8 +90,8 @@ NYBEM.est.sub.hard_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=4}
-HSIplotter(NYBEM.est.sub.hard, 
+```{r fig.width=6, fig.height=6}
+nybem::HSIplotter(NYBEM.est.sub.hard, 
            xlab = NYBEM.est.sub.hard_labels$label, 
            ylab = NYBEM.est.sub.hard_labels$variable)
 ```
@@ -118,9 +118,9 @@ NYBEM.est.sub.soft.sav_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=4}
+```{r fig.width=6, fig.height=6}
 
-HSIplotter(NYBEM.est.sub.soft.sav, 
+nybem::HSIplotter(NYBEM.est.sub.soft.sav, 
            xlab = NYBEM.est.sub.soft.sav_labels$label, 
            ylab = NYBEM.est.sub.soft.sav_labels$variable)
 ```
@@ -147,8 +147,8 @@ NYBEM.est.sub.soft.clam_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=4}
-HSIplotter(NYBEM.est.sub.soft.clam, 
+```{r fig.width=6, fig.height=6}
+nybem::HSIplotter(NYBEM.est.sub.soft.clam, 
            xlab = NYBEM.est.sub.soft.clam_labels$label, 
            ylab = NYBEM.est.sub.soft.clam_labels$variable)
 ```
@@ -181,8 +181,8 @@ NYBEM.mar.int_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=6}
-HSIplotter(NYBEM.mar.int, 
+```{r fig.width=6, fig.height=9}
+nybem::HSIplotter(NYBEM.mar.int, 
            xlab = NYBEM.mar.int_labels$label, 
            ylab = NYBEM.mar.int_labels$variable)
 ```
@@ -211,8 +211,8 @@ NYBEM.mar.sub_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=4}
-HSIplotter(NYBEM.mar.sub, 
+```{r fig.width=6, fig.height=6}
+nybem::HSIplotter(NYBEM.mar.sub, 
            xlab = NYBEM.mar.sub_labels$label, 
            ylab = NYBEM.mar.sub_labels$variable)
 ```
@@ -241,8 +241,8 @@ NYBEM.mar.deep_labels <- data.frame(
 )
 ```
 
-```{r fig.width=4, fig.height=4}
-HSIplotter(NYBEM.mar.deep, 
+```{r fig.width=6, fig.height=6}
+nybem::HSIplotter(NYBEM.mar.deep, 
            xlab = NYBEM.mar.deep_labels$label, 
            ylab = NYBEM.mar.deep_labels$variable)
 ```
@@ -270,7 +270,7 @@ nybem_submodels <- list(
 ```
 
 # Save data to package
-```{r}
+```{r eval=FALSE}
 usethis::use_data(nybem_submodels,
                   overwrite = TRUE)
 ```
