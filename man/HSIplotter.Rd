@@ -36,7 +36,7 @@ barredowl_ecorest <- ecorest::HSImodels$barredowl
 HSIplotter(barredowl_ecorest)
 
 # Get americancoot HSI model record from the `ecorest`package (example of
-continuous and categorical metrics)
+# continuous and categorical metrics)
 americancoot_ecorest <- ecorest::HSImodels$americancoot
 
 # Create the plot

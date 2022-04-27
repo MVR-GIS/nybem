@@ -33,13 +33,13 @@
 #' HSIplotter(barredowl_ecorest)
 #'
 #' # Get americancoot HSI model record from the `ecorest`package (example of
-#' continuous and categorical metrics)
+#' # continuous and categorical metrics)
 #' americancoot_ecorest <- ecorest::HSImodels$americancoot
 #'
 #' # Create the plot
 #' HSIplotter(americancoot_ecorest)
 #'
-#' @importFrom graphics par lines box barplot
+#' @importFrom graphics par lines box barplot abline
 #'
 HSIplotter <- function (SI, xlab = NA,  ylab = NA, ncol = 2) {
   # Set number of metrics in the SI model (count of breakpoint-SI pairs)
