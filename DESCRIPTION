@@ -26,13 +26,14 @@ Suggests:
     knitr,
     testthat (>= 3.0.0),
     vdiffr,
-    diffviewer
+    diffviewer,
+    rgdal    
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Imports: 
     sp,
     ecorest,
     raster,
-    dplyr, 
+    dplyr,
     foreign,
     tmap
