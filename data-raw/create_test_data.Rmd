@@ -49,7 +49,7 @@ Create a small test study area for efficient process testing. Test are centered 
 # extent expressed in NAD83(2011) / UTM zone 18N
 study_area_extent <- raster::extent(544900,547600,4376700,4379300)
 study_area <- FedData::polygon_from_extent(study_area_extent, 
-                                  proj4string = proj4string(study_area_crs))
+                              proj4string = sp::proj4string(study_area_crs))
 ```
 
 ```{r get-ned}
@@ -66,19 +66,19 @@ NLCD <- FedData::get_nlcd(template = study_area,
 
 ```{r test-reproject}
 # Project all layers to study_area coordinate system
-nlcd_utm18 <- projectRaster(NLCD, 
-                            res = c(30, 30),
-                            crs = study_area_crs,
-                            method = "ngb")
+nlcd_utm18 <- raster::projectRaster(NLCD, 
+                                    res = c(30, 30),
+                                    crs = study_area_crs,
+                                    method = "ngb")
 # Mask to study area extent
-nlcd_crop <- crop(nlcd_utm18, study_area)
+nlcd_crop <- raster::crop(nlcd_utm18, study_area)
 
 # Snap to NLCD
-ned <- projectRaster(NED, 
-                     res = c(30, 30),
-                     crs = study_area_crs,
-                     to = nlcd_crop,
-                     method = "bilinear")
+ned <- raster::projectRaster(NED, 
+                             res = c(30, 30),
+                             crs = study_area_crs,
+                             to = nlcd_crop,
+                             method = "bilinear")
 ```
 
 ```{r display-nlcd}
@@ -119,7 +119,7 @@ Create a large study area for practical process testing. The extents of this stu
 # extent expressed in NAD83(2011) / UTM zone 18N
 nj_shore_extent <- raster::extent(500000,600000,4300000,4485000)
 nj_shore <- FedData::polygon_from_extent(nj_shore_extent, 
-                                  proj4string = proj4string(study_area_crs))
+                              proj4string = sp::proj4string(study_area_crs))
 ```
 
 ```{r get-ned-nj-shore, eval=TRUE}
@@ -141,15 +141,15 @@ NLCD_nj_shore
 
 ```{r reproject-nj-shore, eval=TRUE}
 # Project all layers to study_area coordinate system
-nlcd_nj_shore_utm18 <- projectRaster(NLCD_nj_shore, 
+nlcd_nj_shore_utm18 <- raster::projectRaster(NLCD_nj_shore, 
                                      res = c(30, 30),
                                      crs = study_area_crs,
                                      method = "ngb")
 # Mask to study area extent
-nlcd_nj_shore <- crop(nlcd_nj_shore_utm18, nj_shore)
+nlcd_nj_shore <- raster::crop(nlcd_nj_shore_utm18, nj_shore)
 
 # Snap to NLCD
-ned_nj_shore <- projectRaster(NED_nj_shore, 
+ned_nj_shore <- raster::projectRaster(NED_nj_shore, 
                               res = c(30, 30),
                               crs = study_area_crs,
                               to = nlcd_nj_shore,
