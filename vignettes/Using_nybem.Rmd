@@ -49,10 +49,53 @@ nybem::HSIplotter(nybem_submodels$NYBEM.fresh.tid,
                   ylab = nybem_submodels$NYBEM.fresh.tid_labels$variable)
 ```
 
-```{r fig.width=6, fig.height=6}
-# Estuarine, Subtidal, Soft Bottom, Submersed Aquatic Vegetation
-nybem::HSIplotter(nybem_submodels$NYBEM.est.sub.soft.sav,
-                  xlab = nybem_submodels$NYBEM.est.sub.soft.sav_labels$label,
-                  ylab = nybem_submodels$NYBEM.est.sub.soft.sav_labels$variable)
+# Create Site Observations
+```{r}
+# Single numeric site observations
+salinity   <- 40
+veg.cover  <- 100
+deposition <- 0
+obs_1 <- list(salinity, veg.cover, deposition)
+obs_1
 ```
+
+```{r}
+# Raster site observations
+salinity_ras   <- raster::raster(ncol = 2, nrow = 2, vals = rep_len(40, 4))
+veg.cover_ras  <- raster::raster(ncol = 2, nrow = 2, vals = rep_len(100, 4))
+deposition_ras <- raster::raster(ncol = 2, nrow = 2, vals = rep_len(0, 4))
+
+obs_2 <- list(salinity_ras, veg.cover_ras, deposition_ras)
+obs_2
+```
+
+# Calculate Suitability Index Values
+```{r}
+# Suitability Index value for single numeric site observations
+siv_fresh.tid_obs_1 <- nybem::SIcalc(SI = nybem_submodels$NYBEM.fresh.tid,
+                                 input_proj = obs_1)
+siv_fresh.tid_obs_1
+```
+
+```{r}
+# Suitability Index value for raster site observations
+siv_fresh.tid_obs_2 <- nybem::SIcalc(SI = nybem_submodels$NYBEM.fresh.tid,
+                                 input_proj = obs_2)
+siv_fresh.tid_obs_2
+```
+
+
+# Calculate Habitat Suitability Index
+```{r}
+# Calculate HSI for single numeric site observations
+hsi_fresh.tid_obs_1 <- nybem::HSIcalc(si_list = siv_fresh.tid_obs_1)
+hsi_fresh.tid_obs_1
+```
+
+```{r}
+# Calculate HSI for raster site observations
+hsi_fresh.tid_obs_2 <- nybem::HSIcalc(si_list = siv_fresh.tid_obs_2)
+hsi_fresh.tid_obs_2
+```
+
 
