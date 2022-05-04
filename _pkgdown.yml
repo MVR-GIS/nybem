@@ -17,11 +17,11 @@ reference:
   desc: >
     Calculates the habitat suitability index for the input suitability indices.
   contents:
-  - HSIclac
+  - HSIcalc
 - title: "Visualization"
   desc: "Helps display habitat suitability model data"
   contents:
-  - HSIPlotter
+  - HSIplotter
   - raster_fig
 - title: "Habitat Zonation"
   desc: "Delineates habitat zones from input raster datasets."
@@ -35,6 +35,6 @@ reference:
   - ifelse
   - is_RasterLayer
   - is_cat_raster
-  - write_cat_tiff
+  - write_cat_tif
   - has_colortable
   - are_colors
