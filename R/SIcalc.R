@@ -1,4 +1,4 @@
-#' @title Calculate Suitability Indicies
+#' @title Calculate Suitability Indices
 #'
 #' @description SIcalc computes suitability indices given a set of suitability
 #'   curves and project-specific inputs. Suitability indices may be computed
@@ -27,6 +27,31 @@
 #'   Ecological Services Manual, 102.
 #' * US Fish and Wildlife Service. (1981). Standards for the Development of
 #'   Habitat Suitability Index Models. Ecological Services Manual, 103.
+#'
+#' @examples
+#' # Build manual model
+#' # Number of trees > 51cm diameter per 0.4 ha plot
+#' tree.num     <- c(0, 2, 4, NA)              # parameter breakpoints
+#' tree.num.SIV <- c(0.1, 1, 1, NA)            # parameter suitability indices
+#' tree_num <- data.frame(tree.num, tree.num.SIV)
+#'
+#' # Mean diameter of overstory trees
+#' avg.dbh      <- c(0, 5, 20, NA)             # parameter breakpoints
+#' avg.dbh.SIV  <- c(0, 0, 1, NA)              # parameter suitability indices
+#' tree_diameter <- data.frame(avg.dbh, avg.dbh.SIV)
+#'
+#' # Percent canopy cover of overstory trees
+#' can.cov      <- c(0, 20, 60, 100)           # parameter breakpoints
+#' can.cov.SIV  <- c(0, 0, 1, 1)               # parameter suitability indices
+#' canopy_cov <- data.frame(can.cov, can.cov.SIV)
+#'
+#' barredowl <- data.frame(tree_num, tree_diameter, canopy_cov)
+#'
+#  # Barredowl observed metric values
+#' bo_test1 <- list(2, 5, 20)
+#'
+#' # Barredowl si values
+#' bo_si_1 <- nybem::SIcalc(barredowl, bo_test1)
 #'
 #' @importFrom raster raster values getValues setValues levels
 #' @importFrom stats approx
