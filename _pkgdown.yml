@@ -1,0 +1,40 @@
+url: https://github.com/MVR-GIS/nybem
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+reference:
+- title: "Habitat Models"
+  desc: "New York Bight Ecological Model Habitat Models"
+  contents:
+  - nybem_submodels
+- title: "Calculate Habitat Suitability Index Values"
+  desc: >
+    Computes suitability indices given a set of suitability curves and
+    project-specific inputs.
+  contents:
+  - SIcalc
+- title: "Calculate Habitat Suitability Index (HSI)"
+  desc: >
+    Calculates the habitat suitability index for the input suitability indices.
+  contents:
+  - HSIclac
+- title: "Visualization"
+  desc: "Helps display habitat suitability model data"
+  contents:
+  - HSIPlotter
+  - raster_fig
+- title: "Habitat Zonation"
+  desc: "Delineates habitat zones from input raster datasets."
+  contents:
+  - set_habitat_zone
+  - set_salinity_zone
+  - set_tidal_zone
+- title: "Utility Functions"
+  desc: "Useful function to help get things done."
+  contents:
+  - ifelse
+  - is_RasterLayer
+  - is_cat_raster
+  - write_cat_tiff
+  - has_colortable
+  - are_colors
