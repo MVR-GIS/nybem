@@ -28,8 +28,7 @@ bo_si_2 <- nybem::SIcalc(barredowl, bo_test2)
 si_list <- bo_si_1
 method  <- "mean"
 
-er_bo_hsi <- ecorest::HSIarimean(c(1, 0, 0))
-
 test_that("check hsi values", {
   expect_equal(HSIcalc(bo_si_1), 0.333, tolerance = 1e-2)
+  expect_equal(HSIcalc(bo_si_2), 1)
 })
