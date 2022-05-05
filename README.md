@@ -12,8 +12,8 @@ An `R` package for performing coastal habitat modeling.
 [![Project Status: Active The project has reached a stable, usable state
 and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.3-orange.svg?style=flat-square)](commits/master)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--04--20-yellowgreen.svg)](/commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square)](commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--05--05-yellowgreen.svg)](/commits/master)
 [![Licence](https://img.shields.io/badge/licence-CC0-blue.svg)](http://choosealicense.com/licenses/cc0-1.0/)
 
 ## Description
@@ -64,6 +64,10 @@ To install the `nybem` package, install from GitHub using the `remotes`
 package:
 
     remotes::install_github(repo = "MVR-GIS/nybem")
+
+## Documentation
+
+Read the [documentation](https://mvr-gis.github.io/nybem/).
 
 ## Bug Reports
 
