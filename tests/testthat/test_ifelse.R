@@ -5,6 +5,9 @@ r2 <- raster(ncol = 2, nrow = 2, vals = rep_len(2, 4))
 # continuous rasters
 r1_4 <- raster(ncol = 2, nrow = 2, vals = 1:4)
 
+# NA raster
+r_na_1 <- raster(ncol = 2, nrow = 2, vals = c(1, NA, 1, 1))
+
 
 test_that("check output data type", {
   expect_true(is_RasterLayer(ifelse(r1 <  1, 0, 3)))
@@ -39,4 +42,9 @@ test_that("check raster math functions", {
 test_that("check single numeric input", {
   expect_equal(ifelse(1 <  1, 0, 3), 3)
   expect_equal(ifelse(1 == 1, 0, 3), 0)
+})
+
+
+test_that("check NA handling", {
+  expect_equal(values(ifelse(r_na_1 == 1, 0, 5)), c(0, NA, 0, 0))
 })
