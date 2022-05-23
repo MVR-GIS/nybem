@@ -10,7 +10,9 @@ obs_can_cov  <- raster::setValues(obs_can_cov,
                                   rep_len(20, raster::ncell(obs_avg_dbh)))
 
 # Combine into parameter object
-bo_test7 <- list(obs_tree_num, obs_avg_dbh, obs_can_cov)
+bo_test7 <- list(m1 = obs_tree_num,
+                 m2 = obs_avg_dbh,
+                 m3 = obs_can_cov)
 
 # Get barredowl HSI model record from the `ecorest`package
 barredowl_ecorest <- ecorest::HSImodels$barredowl

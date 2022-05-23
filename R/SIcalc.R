@@ -116,5 +116,9 @@ SIcalc <- function (SI, input_proj) {
       SI_out[[i]] <- si
     }
   }
+
+  # Assign variable names
+  names(SI_out) <- names(input_proj)
+
   return(SI_out)
 }
