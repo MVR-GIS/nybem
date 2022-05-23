@@ -23,7 +23,7 @@ set_habitat_zone <- function(tidal_zone, salinity_zone) {
   if(!is_RasterLayer(tidal_zone)) {stop("`tidal_zone` must be a raster")}
   if(!is_RasterLayer(salinity_zone)) {stop("`salinity_zone` must be a raster")}
 
-  #Assign habitat zone
+  # Assign habitat zone
   habitat_zone <- ifelse(tidal_zone == 4, 1,
                   ifelse(salinity_zone == 1 &  tidal_zone == 1,  2,
                   ifelse(salinity_zone == 1 &  tidal_zone == 2,  3,
@@ -34,6 +34,7 @@ set_habitat_zone <- function(tidal_zone, salinity_zone) {
                   ifelse(salinity_zone == 3 & (tidal_zone == 1 |
                                                tidal_zone == 2 |
                                                tidal_zone == 3), 7, 0)))))))
+
   ## Assign factor labels
   # Convert the raster to a factor and create a blank raster attribute table
   habitat_zone <- raster::ratify(habitat_zone)
