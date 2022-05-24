@@ -37,4 +37,6 @@ Imports:
     dplyr,
     foreign,
     tmap,
-    tools
+    tools, 
+    sf,
+    stringr

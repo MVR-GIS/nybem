@@ -23,6 +23,11 @@ reference:
   contents:
   - HSIplotter
   - raster_fig
+  - model_summary
+- title: "Summarization"
+  desc: "Summarize the habitat models for a study area"
+  contents:
+  - summarize_by_poly
 - title: "Habitat Zonation"
   desc: "Delineates habitat zones from input raster datasets."
   contents:
@@ -35,6 +40,9 @@ reference:
   - ifelse
   - is_RasterLayer
   - is_cat_raster
-  - write_cat_tif
+  - write_cat_tiff
+  - write_cont_tiff
   - has_colortable
   - are_colors
+  - name_model
+  - na_outside_model

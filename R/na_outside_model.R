@@ -10,6 +10,8 @@
 #' @return  A raster with unmodeled HSI cells originally set to -1, converted
 #' to NA for summarization.
 #'
+#' @importFrom raster reclassify
+#'
 na_outside_model <- function(hsi_model) {
   # Check inputs
   if(!is_RasterLayer(hsi_model)) {stop("hsi_model must be a raster")}

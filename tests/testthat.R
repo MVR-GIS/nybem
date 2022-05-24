@@ -6,5 +6,8 @@ library(raster)
 library(dplyr)
 library(tmap)
 library(rgdal)
+library(rlang)
+library(sf)
+library(sp)
 
 test_check("nybem")

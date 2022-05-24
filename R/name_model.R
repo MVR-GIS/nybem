@@ -9,6 +9,8 @@
 #'
 #' @return A raster with the name assigned.
 #'
+#' @importFrom stringr str_replace_all
+#'
 name_model <- function(hsi_model, model_name) {
   # Check inputs
   if(!is_RasterLayer(hsi_model)) {stop("hsi_model must be a raster")}
