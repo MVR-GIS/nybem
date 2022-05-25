@@ -12,7 +12,7 @@
 #'   * acres_<model_name> - Area in acres for the polygon.
 #'
 #' @importFrom rlang enquo !! :=
-#' @importFrom raster extract
+#' @importFrom raster extract area
 #' @importFrom dplyr rename mutate
 #'
 summarize_by_poly <- function(hsi_model, polys) {
@@ -23,9 +23,11 @@ summarize_by_poly <- function(hsi_model, polys) {
   # Construct and enquote field names
   model <- names(hsi_model)
   hu    <- paste0("hu_", model)
+  cnt   <- paste0("count_", model)
   area  <- paste0("acres_", model)
   model_name <- enquo(model)
   hu_field   <- enquo(hu)
+  cnt_field  <- enquo(cnt)
   area_field <- enquo(area)
 
   # Summarize model HSI for each poly
@@ -33,14 +35,19 @@ summarize_by_poly <- function(hsi_model, polys) {
                            fun = mean,
                            na.rm = TRUE,
                            df = TRUE)
-  # Summarize modeled area (ncell) for each poly
-  ncell_vec <- lengths(raster::extract(hsi_model, polys))
+  # Summarize modeled area (cell count) for each poly
+  num_cells <- lengths(raster::extract(hsi_model, polys))
+
+  # Calculate cell area in sq m
+  cell_size_m <- terra::linearUnits(terra::rast(hsi_model))
+  cell_area <- cell_size_m^2
 
   # Join HSI and (calculate) Area
   hu_df <- hu_df %>%
     rename(!!hu_field := !!model_name) %>%
-                            # 1 cell = 100 sq m; 1 sq m = 0.000247105 acres
-    mutate(!!area_field := (ncell_vec * 100) * 0.000247105)
+    mutate(!!cnt_field := num_cells) %>%
+                            # 1 sq m = 0.000247105 acres
+    mutate(!!area_field := (num_cells * cell_area) * 0.000247105)
 
   return(hu_df)
 }
