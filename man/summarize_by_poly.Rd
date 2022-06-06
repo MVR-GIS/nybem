@@ -15,6 +15,7 @@ raster.}
 \value{
 A data frame containing polygons summarized by the following fields:
 \itemize{
+\item ID - Polygon unique identifier.
 \item hu_<model_name> - HSI score mean for the polygon.
 \item count_<model_name> - Count of cells for the polygon.
 \item acres_<model_name> - Area in acres for the polygon.

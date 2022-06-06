@@ -9,5 +9,6 @@ library(rgdal)
 library(rlang)
 library(sf)
 library(sp)
+library(purrr)
 
 test_check("nybem")

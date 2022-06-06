@@ -8,6 +8,7 @@
 #'                    raster.
 #'
 #' @return A data frame containing polygons summarized by the following fields:
+#'   * ID - Polygon unique identifier.
 #'   * hu_<model_name> - HSI score mean for the polygon.
 #'   * count_<model_name> - Count of cells for the polygon.
 #'   * acres_<model_name> - Area in acres for the polygon.
