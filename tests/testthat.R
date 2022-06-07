@@ -10,5 +10,6 @@ library(rlang)
 library(sf)
 library(sp)
 library(purrr)
+library(exactextractr)
 
 test_check("nybem")

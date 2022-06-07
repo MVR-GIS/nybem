@@ -14,9 +14,9 @@
 #'   * acres_<model_name> - Area in acres for the polygon.
 #'
 #' @importFrom rlang enquo !! := sym
-#' @importFrom raster extract area
+#' @importFrom exactextractr  exact_extract
 #' @importFrom terra rast linearUnits
-#' @importFrom dplyr rename mutate inner_join
+#' @importFrom dplyr rename mutate relocate
 #' @importFrom magrittr %>%
 #'
 summarize_by_poly <- function(hsi_model, polys) {
@@ -34,36 +34,22 @@ summarize_by_poly <- function(hsi_model, polys) {
   cnt_field  <- enquo(cnt)
   area_field <- enquo(area)
 
-  # Summarize model HSI for each poly
-  hu_df <- raster::extract(hsi_model, polys,
-                           fun = mean,
-                           na.rm = TRUE,
-                           df = TRUE)
+  # Summarize model for each poly
+  sum_df <- exactextractr::exact_extract(hsi_model, polys,
+                                         fun = c("mean", "count"))
 
-  # Reclassify HSI model values to 1 for counting
-  hsi_model_1 <- raster::reclassify(hsi_model,
-                                    cbind(-Inf, Inf, 1))
+  # Calculate cell area in m sq
+  cell_size_m  <- terra::linearUnits(terra::rast(hsi_model))
+  cell_area_m2 <- cell_size_m^2
 
-  # Calculate cell area in sq m
-  cell_size_m <- terra::linearUnits(terra::rast(hsi_model))
-  cell_area <- cell_size_m^2
+  # Rename fields and calculate area in acres
+  sum_df <- sum_df %>%
+    rename(!!hu_field := mean) %>%
+    rename(!!cnt_field := count) %>%
+                                         # 1 sq m = 0.000247105 acres
+    mutate(!!area_field := (!!sym(cnt) * cell_area_m2) * 0.000247105) %>%
+    mutate(ID = as.numeric(row.names(.))) %>%
+    relocate(ID, .before = 1)
 
-  # Summarize modeled area for each poly
-  num_cells_df <- raster::extract(hsi_model_1, polys,
-                                  fun = sum,
-                                  na.rm = TRUE,
-                                  df = TRUE)
-
-  # Calculate modeled area
-  num_cells_df <- num_cells_df %>%
-    rename(!!cnt_field := !!model_name) %>%
-                                               # 1 sq m = 0.000247105 acres
-    mutate(!!area_field := (!!sym(cnt) * cell_area) * 0.000247105)
-
-  # Join HSI and Area dfs
-  hu_df <- hu_df %>%
-    rename(!!hu_field := !!model_name) %>%
-    inner_join(num_cells_df, by = "ID")
-
-  return(hu_df)
+  return(sum_df)
 }
