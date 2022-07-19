@@ -1,24 +1,26 @@
 # Create model rasters
-## EPSG:26918 = NAD83 / UTM zone 18N linear units meters
+## PROJ6 method: EPSG:26918 = NAD83 / UTM zone 18N linear units meters
+crs_1 <- sp::CRS(SRS_string = "EPSG:26918")
+
 model_0   <- raster::raster(ncol = 2, nrow = 2, vals = rep_len(0, 4),
                             xmn = 0, xmx = 2, ymn = 0, ymx = 2,
-                            crs = "EPSG:26918")
+                            crs = crs_1)
 model_1   <- raster::raster(ncol = 2, nrow = 2, vals = rep_len(1, 4),
                             xmn = 0, xmx = 2, ymn = 0, ymx = 2,
-                            crs = "EPSG:26918")
+                            crs = crs_1)
 model_4   <- raster::raster(ncol = 2, nrow = 2, vals = 1:4,
                             xmn = 0, xmx = 2, ymn = 0, ymx = 2,
-                            crs = "EPSG:26918")
+                            crs = crs_1)
 model_na   <- raster::raster(ncol = 2, nrow = 2, vals = c(2, 2, NA, NA),
                             xmn = 0, xmx = 2, ymn = 0, ymx = 2,
-                            crs = "EPSG:26918")
+                            crs = crs_1)
 
 # Create test polygons
 poly_1 <- raster::rasterToPolygons(model_0, dissolve = TRUE)
 poly_4 <- raster::rasterToPolygons(model_0)
 
 # Visually verify raster and polygon dimensions
-# plot(model_na)
+# raster::plot(model_na)
 # plot(sf::st_as_sf(poly_1), add = TRUE, col = NA, border = "red")
 
 # Calculate polygon summaries
@@ -29,6 +31,7 @@ sum_2 <- summarize_by_poly(model_na, sf::st_as_sf(poly_1))
 # Variable for testing
 hsi_model <- model_0
 polys <- sf::st_as_sf(poly_1)
+progress <- TRUE
 
 # all rasters are 4 sq meters = 0.000988422 acres
 
