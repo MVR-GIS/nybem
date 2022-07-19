@@ -4,13 +4,15 @@
 \alias{summarize_by_poly}
 \title{Summarize Raster by Polygon}
 \usage{
-summarize_by_poly(hsi_model, polys)
+summarize_by_poly(hsi_model, polys, progress = TRUE)
 }
 \arguments{
 \item{hsi_model}{raster; A raster HSI model.}
 
 \item{polys}{sf; A polygon used to derive be summaries from the
 raster.}
+
+\item{progress}{logical; TRUE displays a progress bar during processing}
 }
 \value{
 A data frame containing polygons summarized by the following fields:
