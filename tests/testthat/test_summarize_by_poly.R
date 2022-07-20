@@ -14,6 +14,9 @@ model_4   <- raster::raster(ncol = 2, nrow = 2, vals = 1:4,
 model_na   <- raster::raster(ncol = 2, nrow = 2, vals = c(2, 2, NA, NA),
                             xmn = 0, xmx = 2, ymn = 0, ymx = 2,
                             crs = crs_1)
+model_na_2 <- raster::raster(ncol = 2, nrow = 2, vals = c(NA, NA, NA, NA),
+                             xmn = 0, xmx = 2, ymn = 0, ymx = 2,
+                             crs = crs_1)
 
 # Create test polygons
 poly_1 <- raster::rasterToPolygons(model_0, dissolve = TRUE)
@@ -24,9 +27,11 @@ poly_4 <- raster::rasterToPolygons(model_0)
 # plot(sf::st_as_sf(poly_1), add = TRUE, col = NA, border = "red")
 
 # Calculate polygon summaries
-sum_0 <- summarize_by_poly(model_0, sf::st_as_sf(poly_1))
-sum_1 <- summarize_by_poly(model_1, sf::st_as_sf(poly_1))
-sum_2 <- summarize_by_poly(model_na, sf::st_as_sf(poly_1))
+sum_0   <- summarize_by_poly(model_0, sf::st_as_sf(poly_1))
+sum_0_2 <- summarize_by_poly(model_na_2, sf::st_as_sf(poly_1))
+sum_1   <- summarize_by_poly(model_1, sf::st_as_sf(poly_1))
+sum_2   <- summarize_by_poly(model_na, sf::st_as_sf(poly_1))
+
 
 # Variable for testing
 hsi_model <- model_0
@@ -49,4 +54,9 @@ test_that("check na polygon summary", {
   expect_equal(sum_2$hu_layer, 2)
   expect_equal(sum_2$count_layer, 2)
   expect_equal(sum_2$acres_layer, 0.000494211, tolerance = 0.00001)
+})
+
+# issue https://github.com/MVR-GIS/nybem/issues/2
+test_that("check NaN removed when no model values inside polygon", {
+  expect_equal(sum_0_2$hu_layer, 0)
 })

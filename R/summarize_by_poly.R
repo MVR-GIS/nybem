@@ -55,5 +55,9 @@ summarize_by_poly <- function(hsi_model, polys, progress = TRUE) {
     mutate(ID = as.numeric(row.names(.))) %>%
     relocate(ID, .before = 1)
 
+  # Replace hu NaN (produced by mean when cell count is zero)
+  sum_df <- sum_df %>%
+    mutate(!!hu_field := base::ifelse(is.nan(!!sym(hu)), 0, !!sym(hu)))
+
   return(sum_df)
 }
