@@ -43,8 +43,8 @@ poly_4 <- raster::rasterToPolygons(model_0)
 poly2  <- raster::rasterToPolygons(model2_1, dissolve = TRUE)
 
 # Visually verify raster and polygon dimensions
-raster::plot(model_1)
-plot(sf::st_as_sf(poly_4), add = TRUE, col = NA, border = "red")
+raster::plot(model2_1)
+plot(sf::st_as_sf(poly2), add = TRUE, col = NA, border = "red")
 
 # Calculate polygon summaries
 sum_0   <- summarize_by_poly(model_0,    sf::st_as_sf(poly_1))
@@ -55,8 +55,8 @@ sum2_1  <- summarize_by_poly(model2_1,   sf::st_as_sf(poly2))
 sum4_1  <- summarize_by_poly(model_4,    sf::st_as_sf(poly_4))
 
 # Variable for testing
-hsi_model <- model_4
-polys <- sf::st_as_sf(poly_1)
+hsi_model <- model2_1
+polys <- sf::st_as_sf(poly2)
 progress <- TRUE
 
 # Test area calculations

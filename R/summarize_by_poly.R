@@ -17,6 +17,7 @@
 #'
 #' @importFrom rlang enquo !! := sym
 #' @importFrom exactextractr exact_extract
+#' @importFrom raster xres yres
 #' @importFrom terra rast cellSize global
 #' @importFrom dplyr rename mutate relocate
 #' @importFrom magrittr %>%
@@ -46,15 +47,22 @@ summarize_by_poly <- function(hsi_model, polys, progress = TRUE) {
                                          progress = progress)
 
   # Calculate cell area in square meters
-  # Area method: 4 cell corners (more accurate)
-  terra_rast       <- terra::rast(hsi_model)
-  t_cell_area      <- terra::cellSize(terra_rast, unit = "m", transform = TRUE)
-  t_cell_area_mean <- terra::global(t_cell_area, fun = "mean", na.rm = TRUE)
-  t_cell_area_m2   <- t_cell_area_mean$mean
+  # Area method 1: Cheap and fast
+  terra_rast     <- terra::rast(hsi_model)
+  linear_units_m <- terra::linearUnits(terra_rast)
+  x_cell_size_m  <- raster::xres(hsi_model) * linear_units_m
+  y_cell_size_m  <- raster::yres(hsi_model) * linear_units_m
+  cell_area_m2   <- x_cell_size_m * y_cell_size_m
 
-  # Area method: cell width * height (approximation at high latitudes)
-  # crs_meter <- sp::CRS(SRS_string = "ESRI:102008") # NA Albers Equal Area Conic
-  # hsi_model_m <- raster::projectRaster(hsi_model, crs = crs_meter)
+  # Area method 2: 4 cell corners (more accurate, too complex, too slow)
+  # terra_rast     <- terra::rast(hsi_model)
+  # cell_area      <- terra::cellSize(terra_rast, unit = "m", transform = TRUE)
+  # cell_area_mean <- terra::global(cell_area, fun = "mean", na.rm = TRUE)
+  # cell_area_m2   <- cell_area_mean$mean
+
+  # Area method 3: cell mean width * height (approximation at high latitudes)
+  # crs_meter    <- sp::CRS(SRS_string = "ESRI:102008") #Albers Equal Area Conic
+  # hsi_model_m  <- raster::projectRaster(hsi_model, crs = crs_meter)
   # cell_area    <- suppressWarnings(raster::area(hsi_model_m, na.rm = TRUE))
   # cell_area_m2 <- raster::cellStats(cell_area, stat = "mean", na.rm = TRUE)
 
@@ -65,7 +73,7 @@ summarize_by_poly <- function(hsi_model, polys, progress = TRUE) {
   sum_df <- sum_df %>%
     rename(!!hu_field := mean) %>%
     rename(!!cnt_field := count) %>%
-    mutate(!!area_field := (!!sym(cnt) * t_cell_area_m2) * acres_sqm) %>%
+    mutate(!!area_field := (!!sym(cnt) * cell_area_m2) * acres_sqm) %>%
     mutate(ID = as.numeric(row.names(.))) %>%
     relocate(ID, .before = 1)
 
