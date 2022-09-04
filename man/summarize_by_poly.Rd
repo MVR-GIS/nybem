@@ -12,7 +12,7 @@ summarize_by_poly(hsi_model, polys, progress = TRUE)
 \item{polys}{sf; A polygon used to derive be summaries from the
 raster.}
 
-\item{progress}{logical; TRUE displays a progress bar during processing}
+\item{progress}{logical; TRUE displays a progress bar during processing.}
 }
 \value{
 A data frame containing polygons summarized by the following fields:

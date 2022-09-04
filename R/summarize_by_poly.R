@@ -6,7 +6,7 @@
 #' @param hsi_model   raster; A raster HSI model.
 #' @param polys       sf; A polygon used to derive be summaries from the
 #'                    raster.
-#' @param progress    logical; TRUE displays a progress bar during processing
+#' @param progress    logical; TRUE displays a progress bar during processing.
 #'
 #' @return A data frame containing polygons summarized by the following fields:
 #'   * ID - Polygon unique identifier. Derived from polys' row.names.
