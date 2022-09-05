@@ -11,6 +11,7 @@
 #' @param poly_field     character; The `polys` field used to identify the
 #'                       summarization features.
 #' @param caption        character; A caption for the table.
+#' @param digits         numeric; Number of decimal places to round metric.
 #'
 #' @return A model summary data frame and a `knitr::kable` table object (is
 #' returned silently).
@@ -23,7 +24,7 @@
 #'
 summary_table <- function(summary_df, model_metric = c("hu_", "acres_"),
                           polys, poly_field,
-                          caption) {
+                          caption, digits = 2) {
   # Capture `poly_field` as symbol
   poly_field_name <- rlang::sym(poly_field)
 
@@ -47,7 +48,7 @@ summary_table <- function(summary_df, model_metric = c("hu_", "acres_"),
 
   print(knitr::kable(summary_df_metric,
                      col.names = col_names,
-                     digits = 2,
+                     digits = digits,
                      caption = caption))
 
   return(summary_df_metric)

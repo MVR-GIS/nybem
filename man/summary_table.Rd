@@ -9,7 +9,8 @@ summary_table(
   model_metric = c("hu_", "acres_"),
   polys,
   poly_field,
-  caption
+  caption,
+  digits = 2
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ summary_table(
 summarization features.}
 
 \item{caption}{character; A caption for the table.}
+
+\item{digits}{numeric; Number of decimal places to round metric.}
 }
 \value{
 A model summary data frame and a \code{knitr::kable} table object (is
