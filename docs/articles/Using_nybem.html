@@ -8,8 +8,8 @@
 <meta name="description" content="nybem">
 <title>Using `nybem` • nybem</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using `nybem`">
 <meta property="og:description" content="nybem">
@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">nybem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Using `nybem`</h1>
             
       
@@ -86,23 +86,23 @@
 <p>To install the <code>nybem</code> package, install from GitHub using
 the <code>remotes</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"MVR-GIS/nybem"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"MVR-GIS/nybem"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="load-required-packages">Load Required Packages<a class="anchor" aria-label="anchor" href="#load-required-packages"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MVR-GIS/nybem">nybem</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Attaching package: 'nybem'</span></code></pre>
-<pre><code><span class="co">## The following object is masked from 'package:base':</span>
-<span class="co">## </span>
-<span class="co">##     ifelse</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MVR-GIS/nybem">nybem</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Attaching package: 'nybem'</span></span></code></pre>
+<pre><code><span><span class="co">## The following object is masked from 'package:base':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     ifelse</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Warning: package 'raster' was built under R version 4.1.3</span></code></pre>
-<pre><code><span class="co">## Loading required package: sp</span></code></pre>
-<pre><code><span class="co">## Warning: package 'sp' was built under R version 4.1.3</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'raster' was built under R version 4.2.1</span></span></code></pre>
+<pre><code><span><span class="co">## Loading required package: sp</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: package 'sp' was built under R version 4.2.1</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="list-the-nybem-models">List the NYBEM Models<a class="anchor" aria-label="anchor" href="#list-the-nybem-models"></a>
@@ -117,187 +117,187 @@ habitat variables and their matching suitability index values, while the
 second data frame (<code>*_labels</code>) contains the labels used in
 plotting.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Load the model data</span>
-<span class="va">nybem_submodels</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="va"><a href="../reference/nybem_submodels.html">nybem_submodels</a></span>
-
-<span class="co"># View the available submodels</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nybem_submodels</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  [1] "NYBEM.fresh.tid"                "NYBEM.fresh.tid_labels"        </span>
-<span class="co">##  [3] "NYBEM.est.int"                  "NYBEM.est.int_labels"          </span>
-<span class="co">##  [5] "NYBEM.est.sub.hard"             "NYBEM.est.sub.hard_labels"     </span>
-<span class="co">##  [7] "NYBEM.est.sub.soft.sav"         "NYBEM.est.sub.soft.sav_labels" </span>
-<span class="co">##  [9] "NYBEM.est.sub.soft.clam"        "NYBEM.est.sub.soft.clam_labels"</span>
-<span class="co">## [11] "NYBEM.mar.int"                  "NYBEM.mar.int_labels"          </span>
-<span class="co">## [13] "NYBEM.mar.sub"                  "NYBEM.mar.sub_labels"          </span>
-<span class="co">## [15] "NYBEM.mar.deep"                 "NYBEM.mar.deep_labels"</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Load the model data</span></span>
+<span><span class="va">nybem_submodels</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="va"><a href="../reference/nybem_submodels.html">nybem_submodels</a></span></span>
+<span></span>
+<span><span class="co"># View the available submodels</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">nybem_submodels</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "NYBEM.fresh.tid"                "NYBEM.fresh.tid_labels"        </span></span>
+<span><span class="co">##  [3] "NYBEM.est.int"                  "NYBEM.est.int_labels"          </span></span>
+<span><span class="co">##  [5] "NYBEM.est.sub.hard"             "NYBEM.est.sub.hard_labels"     </span></span>
+<span><span class="co">##  [7] "NYBEM.est.sub.soft.sav"         "NYBEM.est.sub.soft.sav_labels" </span></span>
+<span><span class="co">##  [9] "NYBEM.est.sub.soft.clam"        "NYBEM.est.sub.soft.clam_labels"</span></span>
+<span><span class="co">## [11] "NYBEM.mar.int"                  "NYBEM.mar.int_labels"          </span></span>
+<span><span class="co">## [13] "NYBEM.mar.sub"                  "NYBEM.mar.sub_labels"          </span></span>
+<span><span class="co">## [15] "NYBEM.mar.deep"                 "NYBEM.mar.deep_labels"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="view-the-suitability-index-data-frame">View the Suitability Index data frame<a class="anchor" aria-label="anchor" href="#view-the-suitability-index-data-frame"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># View the Freshwater Tidal model</span>
-<span class="co"># View table of habitat variables and their suitability index values </span>
-<span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span></code></pre></div>
-<pre><code><span class="co">##   salinity.per salinity.SIV veg.cover.per veg.cover.SIV deposition</span>
-<span class="co">## 1            0            0            50           0.0          0</span>
-<span class="co">## 2           20            1            57           0.5          1</span>
-<span class="co">## 3          100            1           100           1.0         NA</span>
-<span class="co">##   deposition.SIV</span>
-<span class="co">## 1              1</span>
-<span class="co">## 2              0</span>
-<span class="co">## 3             NA</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># View the Freshwater Tidal model</span></span>
+<span><span class="co"># View table of habitat variables and their suitability index values </span></span>
+<span><span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span></span></code></pre></div>
+<pre><code><span><span class="co">##   salinity.per salinity.SIV veg.cover.per veg.cover.SIV deposition</span></span>
+<span><span class="co">## 1            0            1             0           0.1          1</span></span>
+<span><span class="co">## 2           20            0            57           0.5          2</span></span>
+<span><span class="co">## 3          100            0           100           1.0          5</span></span>
+<span><span class="co">##   deposition.SIV</span></span>
+<span><span class="co">## 1              0</span></span>
+<span><span class="co">## 2              1</span></span>
+<span><span class="co">## 3              1</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="view-the-suitability-index-model-labels">View the Suitability Index model labels<a class="anchor" aria-label="anchor" href="#view-the-suitability-index-model-labels"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid_labels</span></code></pre></div>
-<pre><code><span class="co">##               model                                label   variable</span>
-<span class="co">## 1 Freshwater, Tidal Salinity duration (% time &gt; 0.5 psu)   salinity</span>
-<span class="co">## 2 Freshwater, Tidal                 Vegetation Cover (%)  veg.cover</span>
-<span class="co">## 3 Freshwater, Tidal                       Relative Depth deposition</span></code></pre>
+<code class="sourceCode R"><span><span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid_labels</span></span></code></pre></div>
+<pre><code><span><span class="co">##               model                                label   variable</span></span>
+<span><span class="co">## 1 Freshwater, Tidal Salinity duration (% time &gt; 0.5 psu)   salinity</span></span>
+<span><span class="co">## 2 Freshwater, Tidal                 Vegetation Cover (%)  veg.cover</span></span>
+<span><span class="co">## 3 Freshwater, Tidal                       Relative Depth deposition</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="plot-the-suitability-index-values">Plot the Suitability Index Values<a class="anchor" aria-label="anchor" href="#plot-the-suitability-index-values"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Freshwater, Tidal</span>
-<span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/HSIplotter.html">HSIplotter</a></span><span class="op">(</span><span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span>,
-                  xlab <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid_labels</span><span class="op">$</span><span class="va">label</span>,
-                  ylab <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid_labels</span><span class="op">$</span><span class="va">variable</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Freshwater, Tidal</span></span>
+<span><span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/HSIplotter.html">HSIplotter</a></span><span class="op">(</span><span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span>,</span>
+<span>                  xlab <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid_labels</span><span class="op">$</span><span class="va">label</span>,</span>
+<span>                  ylab <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid_labels</span><span class="op">$</span><span class="va">variable</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Using_nybem_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="create-site-observations">Create Site Observations<a class="anchor" aria-label="anchor" href="#create-site-observations"></a>
 </h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Single numeric site observations</span>
-<span class="va">salinity</span>   <span class="op">&lt;-</span> <span class="fl">40</span>
-<span class="va">veg.cover</span>  <span class="op">&lt;-</span> <span class="fl">100</span>
-<span class="va">deposition</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">obs_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">salinity</span>, <span class="va">veg.cover</span>, <span class="va">deposition</span><span class="op">)</span>
-<span class="va">obs_1</span></code></pre></div>
-<pre><code><span class="co">## [[1]]</span>
-<span class="co">## [1] 40</span>
-<span class="co">## </span>
-<span class="co">## [[2]]</span>
-<span class="co">## [1] 100</span>
-<span class="co">## </span>
-<span class="co">## [[3]]</span>
-<span class="co">## [1] 0</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Single numeric site observations</span></span>
+<span><span class="va">salinity</span>   <span class="op">&lt;-</span> <span class="fl">40</span></span>
+<span><span class="va">veg.cover</span>  <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">deposition</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">obs_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">salinity</span>, <span class="va">veg.cover</span>, <span class="va">deposition</span><span class="op">)</span></span>
+<span><span class="va">obs_1</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## [1] 40</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[2]]</span></span>
+<span><span class="co">## [1] 100</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[3]]</span></span>
+<span><span class="co">## [1] 0</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Raster site observations</span>
-<span class="va">salinity_ras</span>   <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="va">veg.cover_ras</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="va">deposition_ras</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">obs_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">salinity_ras</span>, <span class="va">veg.cover_ras</span>, <span class="va">deposition_ras</span><span class="op">)</span>
-<span class="va">obs_2</span></code></pre></div>
-<pre><code><span class="co">## [[1]]</span>
-<span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 40, 40  (min, max)</span>
-<span class="co">## </span>
-<span class="co">## </span>
-<span class="co">## [[2]]</span>
-<span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 100, 100  (min, max)</span>
-<span class="co">## </span>
-<span class="co">## </span>
-<span class="co">## [[3]]</span>
-<span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 0, 0  (min, max)</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Raster site observations</span></span>
+<span><span class="va">salinity_ras</span>   <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">veg.cover_ras</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">deposition_ras</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">obs_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">salinity_ras</span>, <span class="va">veg.cover_ras</span>, <span class="va">deposition_ras</span><span class="op">)</span></span>
+<span><span class="va">obs_2</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 40, 40  (min, max)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[2]]</span></span>
+<span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 100, 100  (min, max)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[3]]</span></span>
+<span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 0, 0  (min, max)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="calculate-suitability-index-values">Calculate Suitability Index Values<a class="anchor" aria-label="anchor" href="#calculate-suitability-index-values"></a>
 </h2>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Suitability Index value for single numeric site observations</span>
-<span class="va">siv_fresh.tid_obs_1</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/SIcalc.html">SIcalc</a></span><span class="op">(</span>SI <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span>,
-                                 input_proj <span class="op">=</span> <span class="va">obs_1</span><span class="op">)</span>
-<span class="va">siv_fresh.tid_obs_1</span></code></pre></div>
-<pre><code><span class="co">## [[1]]</span>
-<span class="co">## [1] 1</span>
-<span class="co">## </span>
-<span class="co">## [[2]]</span>
-<span class="co">## [1] 1</span>
-<span class="co">## </span>
-<span class="co">## [[3]]</span>
-<span class="co">## [1] 1</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Suitability Index value for single numeric site observations</span></span>
+<span><span class="va">siv_fresh.tid_obs_1</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/SIcalc.html">SIcalc</a></span><span class="op">(</span>SI <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span>,</span>
+<span>                                 input_proj <span class="op">=</span> <span class="va">obs_1</span><span class="op">)</span></span>
+<span><span class="va">siv_fresh.tid_obs_1</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## [1] 0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[2]]</span></span>
+<span><span class="co">## [1] 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[3]]</span></span>
+<span><span class="co">## [1] 0</span></span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Suitability Index value for raster site observations</span>
-<span class="va">siv_fresh.tid_obs_2</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/SIcalc.html">SIcalc</a></span><span class="op">(</span>SI <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span>,
-                                 input_proj <span class="op">=</span> <span class="va">obs_2</span><span class="op">)</span>
-<span class="va">siv_fresh.tid_obs_2</span></code></pre></div>
-<pre><code><span class="co">## [[1]]</span>
-<span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 1, 1  (min, max)</span>
-<span class="co">## </span>
-<span class="co">## </span>
-<span class="co">## [[2]]</span>
-<span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 1, 1  (min, max)</span>
-<span class="co">## </span>
-<span class="co">## </span>
-<span class="co">## [[3]]</span>
-<span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 1, 1  (min, max)</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Suitability Index value for raster site observations</span></span>
+<span><span class="va">siv_fresh.tid_obs_2</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/SIcalc.html">SIcalc</a></span><span class="op">(</span>SI <span class="op">=</span> <span class="va">nybem_submodels</span><span class="op">$</span><span class="va">NYBEM.fresh.tid</span>,</span>
+<span>                                 input_proj <span class="op">=</span> <span class="va">obs_2</span><span class="op">)</span></span>
+<span><span class="va">siv_fresh.tid_obs_2</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 0, 0  (min, max)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[2]]</span></span>
+<span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 1, 1  (min, max)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[3]]</span></span>
+<span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 0, 0  (min, max)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="calculate-habitat-suitability-index">Calculate Habitat Suitability Index<a class="anchor" aria-label="anchor" href="#calculate-habitat-suitability-index"></a>
 </h2>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Calculate HSI for single numeric site observations</span>
-<span class="va">hsi_fresh.tid_obs_1</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/HSIcalc.html">HSIcalc</a></span><span class="op">(</span>si_list <span class="op">=</span> <span class="va">siv_fresh.tid_obs_1</span><span class="op">)</span>
-<span class="va">hsi_fresh.tid_obs_1</span></code></pre></div>
-<pre><code><span class="co">## [1] 1</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Calculate HSI for single numeric site observations</span></span>
+<span><span class="va">hsi_fresh.tid_obs_1</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/HSIcalc.html">HSIcalc</a></span><span class="op">(</span>si_list <span class="op">=</span> <span class="va">siv_fresh.tid_obs_1</span><span class="op">)</span></span>
+<span><span class="va">hsi_fresh.tid_obs_1</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 0.3333333</span></span></code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Calculate HSI for raster site observations</span>
-<span class="va">hsi_fresh.tid_obs_2</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/HSIcalc.html">HSIcalc</a></span><span class="op">(</span>si_list <span class="op">=</span> <span class="va">siv_fresh.tid_obs_2</span><span class="op">)</span>
-<span class="va">hsi_fresh.tid_obs_2</span></code></pre></div>
-<pre><code><span class="co">## class      : RasterLayer </span>
-<span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span>
-<span class="co">## resolution : 180, 90  (x, y)</span>
-<span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span>
-<span class="co">## source     : memory</span>
-<span class="co">## names      : layer </span>
-<span class="co">## values     : 1, 1  (min, max)</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Calculate HSI for raster site observations</span></span>
+<span><span class="va">hsi_fresh.tid_obs_2</span> <span class="op">&lt;-</span> <span class="fu">nybem</span><span class="fu">::</span><span class="fu"><a href="../reference/HSIcalc.html">HSIcalc</a></span><span class="op">(</span>si_list <span class="op">=</span> <span class="va">siv_fresh.tid_obs_2</span><span class="op">)</span></span>
+<span><span class="va">hsi_fresh.tid_obs_2</span></span></code></pre></div>
+<pre><code><span><span class="co">## class      : RasterLayer </span></span>
+<span><span class="co">## dimensions : 2, 2, 4  (nrow, ncol, ncell)</span></span>
+<span><span class="co">## resolution : 180, 90  (x, y)</span></span>
+<span><span class="co">## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">## crs        : +proj=longlat +datum=WGS84 +no_defs </span></span>
+<span><span class="co">## source     : memory</span></span>
+<span><span class="co">## names      : layer </span></span>
+<span><span class="co">## values     : 0.3333333, 0.3333333  (min, max)</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -312,7 +312,7 @@ plotting.</p>
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

@@ -5,38 +5,41 @@ template:
 reference:
 - title: "Habitat Models"
   desc: "New York Bight Ecological Model Habitat Models"
-  contents:
+- contents:
   - nybem_submodels
 - title: "Calculate Habitat Suitability Index Values"
   desc: >
     Computes suitability indices given a set of suitability curves and
     project-specific inputs.
-  contents:
+- contents:
   - SIcalc
 - title: "Calculate Habitat Suitability Index (HSI)"
   desc: >
     Calculates the habitat suitability index for the input suitability indices.
-  contents:
+- contents:
   - HSIcalc
 - title: "Visualization"
   desc: "Helps display habitat suitability model data"
-  contents:
+- contents:
   - HSIplotter
   - raster_fig
   - model_summary
+  - summary_table
+  - feature_model_barplot
 - title: "Summarization"
   desc: "Summarize the habitat models for a study area"
-  contents:
+- contents:
   - summarize_by_poly
+  - summarize_models
 - title: "Habitat Zonation"
   desc: "Delineates habitat zones from input raster datasets."
-  contents:
+- contents:
   - set_habitat_zone
   - set_salinity_zone
   - set_tidal_zone
 - title: "Utility Functions"
   desc: "Useful function to help get things done."
-  contents:
+- contents:
   - ifelse
   - is_RasterLayer
   - is_cat_raster
@@ -46,3 +49,5 @@ reference:
   - are_colors
   - name_model
   - na_outside_model
+  - recode_models
+  - save_raster_rdata

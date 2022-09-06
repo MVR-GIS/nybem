@@ -28,6 +28,9 @@
     <loc>https://github.com/MVR-GIS/nybem/reference/are_colors.html</loc>
   </url>
   <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/feature_model_barplot.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/MVR-GIS/nybem/reference/has_colortable.html</loc>
   </url>
   <url>
@@ -49,10 +52,25 @@
     <loc>https://github.com/MVR-GIS/nybem/reference/is_RasterLayer.html</loc>
   </url>
   <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/model_summary.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/name_model.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/na_outside_model.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/MVR-GIS/nybem/reference/nybem_submodels.html</loc>
   </url>
   <url>
     <loc>https://github.com/MVR-GIS/nybem/reference/raster_fig.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/recode_models.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/save_raster_rdata.html</loc>
   </url>
   <url>
     <loc>https://github.com/MVR-GIS/nybem/reference/set_habitat_zone.html</loc>
@@ -67,6 +85,21 @@
     <loc>https://github.com/MVR-GIS/nybem/reference/SIcalc.html</loc>
   </url>
   <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/summarize_by_poly.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/summarize_models.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/summary_table.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/MVR-GIS/nybem/reference/write_cat_tif.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/write_cat_tiff.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/MVR-GIS/nybem/reference/write_cont_tiff.html</loc>
   </url>
 </urlset>

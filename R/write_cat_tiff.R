@@ -16,7 +16,7 @@
 #' @importFrom tools file_path_sans_ext
 #' @importFrom foreign write.dbf
 #'
-write_cat_tif <- function(cat_raster, out_dir, out_name) {
+write_cat_tiff <- function(cat_raster, out_dir, out_name) {
   # Check inputs
   if(!is_RasterLayer(cat_raster)) {stop("cat_raster must be a raster")}
   if(!file.exists(out_dir)) {stop("out_dir does not exist")}
