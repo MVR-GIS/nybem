@@ -13,11 +13,11 @@ The purpose of this document is to create a package data frame to store the habi
 # Create the model
 NYBEM.fresh.tid <- data.frame(
   salinity.per   = c(0, 20, 100),
-  salinity.SIV   = c(0, 1,  1),
-  veg.cover.per  = c(50, 57,  100),
-  veg.cover.SIV  = c(0,  0.5, 1),
-  deposition     = c(0, 1, NA),
-  deposition.SIV = c(1, 0, NA)
+  salinity.SIV   = c(1, 0, 0),
+  veg.cover.per  = c(0, 57, 100),
+  veg.cover.SIV  = c(0.1, 0.5, 1),
+  deposition     = c(1, 2, 5),
+  deposition.SIV = c(0, 1, 1)
 )
 
 # Create model labels
@@ -45,7 +45,7 @@ NYBEM.est.int <- data.frame(
   veg.cover.SIV  = c(0.1, 1,   NA),
   deposition     = c(0, 1, NA),
   deposition.SIV = c(1, 0, NA),
-  land.use.per   = c(0, 50, 100),
+  land.use.per   = c(0, 10, 100),
   land.use.SIV   = c(1, 1,  0),
   shoreline.m    = c(0,   100, 500),
   shoreline.SIV  = c(0.5, 1,   1)
@@ -101,9 +101,9 @@ nybem::HSIplotter(NYBEM.est.sub.hard,
 # Create the model
 NYBEM.est.sub.soft.sav <- data.frame(
   substrate.sav      = c(0, 70, 100, NA),
-  substrate.sav.SIV  = c(1, 1,  0,   NA),
-  light.PLA          = c(0, 10, 22, NA),
-  light.SIV          = c(0, 0,  1,  NA),
+  substrate.sav.SIV  = c(1, 1,  0.1, NA),
+  light.PLA          = c(0, 10, 22, 100),
+  light.SIV          = c(0, 0,  1,  1),
   vessel.density     = c(0, 1000, 10000, NA),
   vessel.density.SIV = c(1, 1,    0.1,   NA)
 )
@@ -129,20 +129,20 @@ nybem::HSIplotter(NYBEM.est.sub.soft.sav,
 ```{r}
 # Create the model
 NYBEM.est.sub.soft.clam <- data.frame(
-  salinity.clam       = c(0, 12, 12.5, 20,  25, 35, 45),
-  salinity.clam.SIV   = c(0, 0,  0.25, 0.5, 1,  1,  0),
-  substrate.clam.sand = c(0, 30,   70,   100, NA, NA, NA),
-  substrate.clam.SIV  = c(0, 0.25, 0.75, 1,   NA, NA, NA),
-  Isav                = c(0, 0.2, 0.8, 1, NA, NA, NA),
-  Isav.SIV            = c(1, 1,   0,   0, NA, NA, NA)
+  salinity.clam        = c(0, 12, 12.5, 20, 25, 35, 45),
+  salinity.clam.SIV    = c(0, 0, 0.25, 0.75, 1, 1, 0),
+  substrate.clam.fines = c(0, 50, 90, 100, NA, NA, NA),
+  substrate.clam.SIV   = c(1, 0.75, 0.25, 0,  NA, NA, NA),
+  Isav                 = c(0, 0.2, 0.8, 1, NA, NA, NA),
+  Isav.SIV             = c(1, 1, 0, 0, NA, NA, NA)
 )
 
 # Create model labels
 NYBEM.est.sub.soft.clam_labels <- data.frame(
   model = "Estuarine, Subtidal, Soft Bottom, Hard Clam", 
-  label = c("Salinity (psu)", "Sand Composition (%)", 
+  label = c("Salinity (psu)", "Fine Sediment (%)", 
             "SAV Index"),
-  variable = c("salinity.clam", "substrate.clam.sand", 
+  variable = c("salinity.clam", "substrate.clam.fines", 
                "Isav")
 )
 ```
@@ -157,31 +157,28 @@ nybem::HSIplotter(NYBEM.est.sub.soft.clam,
 ```{r}
 # Create the model
 NYBEM.mar.int <- data.frame(
-  beach.slope.per = c(0, 10, 30),
-  beach.slope.SIV = c(1, 1,  0),
-  trel            = c(0, 50, 100),
-  exp.dur.SIV     = c(0, 1,  0),
-  land.use.per    = c(0, 10, 100),
-  land.use.SIV    = c(1, 1,  0),
-  veg.cover.per   = c(0, 40, 100),
-  veg.cover.SIV   = c(1, 1,  0),
-  shoreline.m     = c(0, 100, 500),
-  shoreline.SIV   = c(0, 1,   1)
+  beach.slope.per = c(0, 10, 30, NA),
+  beach.slope.SIV = c(1, 1, 0, NA),
+  trel            = c(0, 0.25, 0.75, 1.0),
+  exp.dur.SIV     = c(0, 1, 1, 0),
+  land.use.per    = c(0, 10, 100, NA),
+  land.use.SIV    = c(1, 1,  0, NA),
+  shoreline.m     = c(0, 100, 500, NA),
+  shoreline.SIV   = c(0, 1, 1, NA)
 )
 
 # Create model labels
 NYBEM.mar.int_labels <- data.frame(
   model = "Marine, Intertidal", 
   label = c("Intertidal Zone Slope (%)", "Relative exposure duration (trel)", 
-            "Developed Area Within 100m (%)", "Vegetation Cover (%)",
+            "Developed Area Within 100m (%)", 
             "Distance to Armored Shoreline (m)"),
   variable = c("beach.slope", "exp.dur",
-               "land.use", "veg.cover",
-               "shoreline")
+               "land.use", "shoreline")
 )
 ```
 
-```{r fig.width=6, fig.height=9}
+```{r fig.width=6, fig.height=6}
 nybem::HSIplotter(NYBEM.mar.int, 
            xlab = NYBEM.mar.int_labels$label, 
            ylab = NYBEM.mar.int_labels$variable)
@@ -191,14 +188,14 @@ nybem::HSIplotter(NYBEM.mar.int,
 ```{r}
 # Create the model
 NYBEM.mar.sub <- data.frame(
-  velocity           = c(0,   25, 50, 100),
-  velocity.SIV       = c(0.6, 1,  1,  0),
+  velocity           = c(0, 25, 50, 100),
+  velocity.SIV       = c(0.6, 1, 1, 0),
   substrate.fines    = c(0, 100, NA, NA),
-  substrate.SIV      = c(1, 0,   NA, NA),
+  substrate.SIV      = c(1, 0.1, NA, NA),
   light.PLW          = c(0, 10, 22, 100),
-  light.SIV          = c(0, 0,  1,  1),
+  light.SIV          = c(0, 0, 1, 1),
   vessel.density     = c(0, 1000, 10000, NA),
-  vessel.density.SIV = c(1, 1,    0.1,   NA)
+  vessel.density.SIV = c(1, 1, 0.1, NA)
 )
 
 # Create model labels
@@ -222,13 +219,13 @@ nybem::HSIplotter(NYBEM.mar.sub,
 # Create the model
 NYBEM.mar.deep <- data.frame(
   salinity.low.dur    = c(0, 50, 100, NA),
-  salinity.low.SIV    = c(1, 0,  0,   NA),
+  salinity.low.SIV    = c(1, 0, 0, NA),
   velocity.low.change = c(-100, -10, 10, 100),
-  velocity.low.SIV    = c(0,    1,   1,  0.8),
+  velocity.low.SIV    = c(0, 1, 1, 0.8),
   light.PLW           = c(0, 10, 22, 100),
-  light.SIV           = c(0, 0,  1,  1),
+  light.SIV           = c(0, 0, 1, 1),
   vessel.density      = c(0, 1000, 10000, NA),
-  vessel.density.SIV  = c(1, 1,    0.1,   NA)
+  vessel.density.SIV  = c(1, 1, 0.1, NA)
 )
 
 # Create model labels
