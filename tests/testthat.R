@@ -11,5 +11,6 @@ library(sf)
 library(sp)
 library(purrr)
 library(exactextractr)
+library(oysteR)
 
 test_check("nybem")

@@ -9,7 +9,7 @@ name_model(hsi_model, model_name)
 \arguments{
 \item{hsi_model}{raster; A raster HSI model.}
 
-\item{name_name}{character; The name of the model.}
+\item{model_name}{character; The name of the model.}
 }
 \value{
 A raster with the name assigned.

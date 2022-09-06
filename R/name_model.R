@@ -5,7 +5,7 @@
 #'
 #' @export
 #' @param hsi_model   raster; A raster HSI model.
-#' @param name_name   character; The name of the model.
+#' @param model_name   character; The name of the model.
 #'
 #' @return A raster with the name assigned.
 #'

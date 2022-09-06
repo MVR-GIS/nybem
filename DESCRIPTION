@@ -22,22 +22,30 @@ BugReports: https://github.com/MVR-GIS/nybem/issues
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Suggests: 
-    rmarkdown,
-    knitr,
-    testthat (>= 3.0.0),
-    vdiffr,
     diffviewer,
-    rgdal    
+    ecorest,
+    oysteR,
+    rgdal,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    vdiffr
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Imports: 
-    sp,
-    ecorest,
-    raster,
     dplyr,
+    exactextractr,
     foreign,
-    tmap,
-    tools, 
+    grDevices,
+    graphics,
+    knitr,
+    magrittr,
+    purrr,
+    raster,
+    rlang,
     sf,
+    sp,
+    stats,
     stringr,
-    exactextractr
+    terra,
+    tmap,
+    tools  

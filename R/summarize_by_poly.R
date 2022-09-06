@@ -71,8 +71,8 @@ summarize_by_poly <- function(hsi_model, polys, progress = TRUE) {
 
   # Rename fields and calculate area in acres
   sum_df <- sum_df %>%
-    rename(!!hu_field := mean) %>%
-    rename(!!cnt_field := count) %>%
+    rename(!!hu_field := .data$mean) %>%
+    rename(!!cnt_field := .data$count) %>%
     mutate(!!area_field := (!!sym(cnt) * cell_area_m2) * acres_sqm) %>%
     mutate(ID = as.numeric(row.names(.))) %>%
     relocate(ID, .before = 1)

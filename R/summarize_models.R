@@ -20,7 +20,7 @@
 #'   * acres_<model_name> - Area in acres for the polygon.
 #'
 #' @importFrom purrr map
-#' @importFrom dplyr bind_cols select
+#' @importFrom dplyr bind_cols select starts_with
 #'
 summarize_models <- function(hsi_models, polys, progress = FALSE) {
   feature_summaries <- hsi_models %>%

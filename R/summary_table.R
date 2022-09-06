@@ -16,8 +16,8 @@
 #' @return A model summary data frame and a `knitr::kable` table object (is
 #' returned silently).
 #'
-#' @importFrom rlang sym := !!
-#' @importFrom dplyr mutate select inner_join relocate
+#' @importFrom rlang sym := !! .data
+#' @importFrom dplyr mutate select inner_join relocate contains
 #' @importFrom purrr set_names
 #' @importFrom stringr str_replace_all
 #' @importFrom knitr kable
@@ -32,7 +32,7 @@ summary_table <- function(summary_df, model_metric = c("hu_", "acres_"),
   polys_label_df <- polys %>%
     dplyr::mutate(ID = as.numeric(row.names(.))) %>%
     dplyr::mutate(feature_name := !!poly_field_name) %>%
-    dplyr::select(ID, feature_name)
+    dplyr::select(ID, .data$feature_name)
 
   # Extract metric from summary
   summary_df_metric <- summary_df %>%
@@ -41,7 +41,7 @@ summary_table <- function(summary_df, model_metric = c("hu_", "acres_"),
     dplyr::mutate(ID = as.numeric(row.names(.))) %>%
     dplyr::inner_join(polys_label_df, by = "ID") %>%
     dplyr::relocate(feature_name, .before = 1) %>%
-    dplyr::select(-c(ID, geometry))
+    dplyr::select(-c(ID, .data$geometry))
 
   # Create table
   col_names <- stringr::str_replace_all(colnames(summary_df_metric), "_", " ")
