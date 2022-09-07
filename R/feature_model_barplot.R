@@ -15,7 +15,7 @@
 #'
 #' @return A `barplot` object.
 #'
-#' @importFrom dplyr relocate filter inner_join arrange
+#' @importFrom dplyr relocate filter inner_join arrange desc
 #' @importFrom rlang .data
 #' @importFrom graphics barplot grid box legend
 #'
@@ -69,7 +69,7 @@ feature_model_barplot <- function(model_summary, habitat_zone,
           las = 2,                                        # vertical bar labels
           cex.names = 0.8,                                   # bar label cex
           col = arrange(style_df,
-                        .data$desc(.data$legend_order))$color, # reverse colors!
+                        desc(.data$legend_order))$color, # reverse colors!
           ylab = ylab,
           main = main)
   # Draw horizontal line to assist reading graph
