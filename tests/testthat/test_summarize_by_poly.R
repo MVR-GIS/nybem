@@ -67,60 +67,71 @@ progress <- TRUE
 
 test_that("check field names", {
   expect_true("ID" %in% colnames(sum_0))
-  expect_true("hu_model_one" %in% colnames(sum_0))
+  expect_true("hsi_model_one" %in% colnames(sum_0))
   expect_true("count_model_one" %in% colnames(sum_0))
   expect_true("acres_model_one" %in% colnames(sum_0))
+  expect_true("hu_model_one" %in% colnames(sum_0))
 })
 
 test_that("check 1m polygon summary", {
   # 1 polygon: poly_1
   expect_equal(sum_0$ID, 1)
-  # 0 + 0 + 0 + 0 = 0 / 4 data cells = 0 hu: model_0
-  expect_equal(sum_0$hu_model_one, 0)
+  # 0 + 0 + 0 + 0 = 0 / 4 data cells = 0 hsi: model_0
+  expect_equal(sum_0$hsi_model_one, 0)
   # 4 data cells
   expect_equal(sum_0$count_model_one, 4)
   # 4 data cells * 1 sq m/pixel = 4 sq m * 0.000247105 ac/sqm = 0.000988422 ac
   expect_equal(sum_0$acres_model_one, 0.000988422, tolerance = 0.00001)
+  # 0.000988422 acres * 0 hsi = 0 hu
+  expect_equal(sum_0$hu_model_one, 0)
   # 1 polygon: poly_1
   expect_equal(sum_1$ID, 1)
-  # 1 + 1 + 1 + 1 = 4 / 4 data cells = 1 hu: model_1
-  expect_equal(sum_1$hu_model_one, 1)
+  # 1 + 1 + 1 + 1 = 4 / 4 data cells = 1 hsi: model_1
+  expect_equal(sum_1$hsi_model_one, 1)
   # 4 data cells
   expect_equal(sum_1$count_model_one, 4)
   # 4 data cells * 1 sq m/pixel = 4 sq m * 0.000247105 ac/sqm = 0.000988422 ac
   expect_equal(sum_1$acres_model_one, 0.000988422, tolerance = 0.00001)
+  # 0.000988422 acres * 1 hsi = 0.000988422 hu
+  expect_equal(sum_1$hu_model_one, 0.000988422, tolerance = 0.00001)
 })
 
 test_that("check 2m polygon summary", {
   # 1 polygon
   expect_equal(sum2_1$ID, 1)
-  # 1 + 1 + 1 + 1 = 4 / 4 data cells = 1 hu
-  expect_equal(sum2_1$hu_model_one, 1)
+  # 1 + 1 + 1 + 1 = 4 / 4 data cells = 1 hsi
+  expect_equal(sum2_1$hsi_model_one, 1)
   # 4 data cells
   expect_equal(sum2_1$count_model_one, 4)
   # 4 data cells * 4 sq m/pixel = 16 sq m * 0.000247105 ac/sqm = 0.00395368 ac
   expect_equal(sum2_1$acres_model_one, 0.00395368, tolerance = 0.00001)
+  # 0.00395368 acres * 1 hsi = 0.00395368 hu
+  expect_equal(sum2_1$hu_model_one, 0.00395368, tolerance = 0.00001)
 })
 
 test_that("check na polygon summary", {
   # 1 polygon
   expect_equal(sum_2$ID, 1)
-  # 2 + 2 + NA + NA = 4 / 2 data cells = 2 hu
-  expect_equal(sum_2$hu_model_one, 2)
+  # 2 + 2 + NA + NA = 4 / 2 data cells = 2 hsi
+  expect_equal(sum_2$hsi_model_one, 2)
   # 2 data cells
   expect_equal(sum_2$count_model_one, 2)
   # 2 data cells * 1 sq m/pixel = 2 sq m * 0.000247105 ac/sqm = 0.00049421 ac
   expect_equal(sum_2$acres_model_one, 0.00049421, tolerance = 0.00001)
+  # 0.00049421 acres * 2 hsi = 0.00098842 hu
+  expect_equal(sum_2$hu_model_one, 0.00098842, tolerance = 0.00001)
 })
 
 test_that("check NaN removed when no model values inside polygon", {
   # 1 polygon
   expect_equal(sum_0_2$ID, 1)
-  # NA + NA + NA + NA = NA / NA data cells = NaN hu = 0 hu
-  expect_equal(sum_0_2$hu_model_one, 0)
+  # NA + NA + NA + NA = NA / NA data cells = NaN, hsi = 0
+  expect_equal(sum_0_2$hsi_model_one, 0)
   # 0 data cells
   expect_equal(sum_0_2$count_model_one, 0)
   # 0 data cells * 1 sq m/pixel = 0 sq m = 0 acres
+  expect_equal(sum_0_2$acres_model_one, 0, tolerance = 0.00001)
+  # 0 acres * 0 hsi = 0 hu
   expect_equal(sum_0_2$acres_model_one, 0, tolerance = 0.00001)
 })
 
@@ -128,10 +139,13 @@ test_that("check multiple polys", {
   # 4 polygons
   expect_equal(sum4_1$ID, 1:4)
   # 4 polys, each of 1-4
-  expect_equal(sum4_1$hu_model_one, 1:4)
+  expect_equal(sum4_1$hsi_model_one, 1:4)
   # 4 polys, 1 cell each
   expect_equal(sum4_1$count_model_one, rep_len(1, 4))
   # 4 polys, 1 cell each equals 0.000247105 acres
   expect_equal(sum4_1$acres_model_one, rep_len(0.000247105, 4),
+               tolerance = 0.00001)
+  # 0.0002471055 acres * 1:4 hsi = 0.0002471055 * 1:4 hu
+  expect_equal(sum4_1$hu_model_one, 0.0002471055 * 1:4,
                tolerance = 0.00001)
 })

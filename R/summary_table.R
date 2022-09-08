@@ -6,7 +6,7 @@
 #' @param summary_df     data.frame; A model summary data frame created by the
 #'                       `summarize_models` function.
 #' @param model_metric   character; The model metric to be summarized from the
-#'                       `summary_df`. One of "hu_" or "acres_".
+#'                       `summary_df`. One of "hsi_", "acres_", or "hu_".
 #' @param polys          sf; A sf polygon object.
 #' @param poly_field     character; The `polys` field used to identify the
 #'                       summarization features.
@@ -22,7 +22,8 @@
 #' @importFrom stringr str_replace_all
 #' @importFrom knitr kable
 #'
-summary_table <- function(summary_df, model_metric = c("hu_", "acres_"),
+summary_table <- function(summary_df,
+                          model_metric = c("hsi_", "acres_", "hu_"),
                           polys, poly_field,
                           caption, digits = 2) {
   # Capture `poly_field` as symbol

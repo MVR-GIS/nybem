@@ -67,9 +67,9 @@ feature_model_barplot <- function(model_summary, habitat_zone,
           beside = FALSE,                                 # stacked bars
           names.arg = feature_names,                      # bar labels
           las = 2,                                        # vertical bar labels
-          cex.names = 0.8,                                   # bar label cex
+          cex.names = 0.8,                                # bar label cex
           col = arrange(style_df,
-                        desc(.data$legend_order))$color, # reverse colors!
+                        desc(.data$legend_order))$color,  # reverse colors!
           ylab = ylab,
           main = main)
   # Draw horizontal line to assist reading graph

@@ -14,10 +14,13 @@
 #' @return A data frame of model summaries containing the following fields
 #' for each model:
 #'   * ID - Polygon unique identifier. Derived from polys' row.names.
-#'   * hu_<model_name> - HSI score mean for the polygon. Model name is derived
-#'                       from the raster data names attribute via names().
+#'   * hsi_<model_name>   - HSI score mean for the polygon. Model name is
+#'                          derived from the raster data names attribute via
+#'                          names().
 #'   * count_<model_name> - Count of cells for the polygon.
 #'   * acres_<model_name> - Area in acres for the polygon.
+#'   * hu_<model_name> -    Habitat Units (HU) calculated by multiplying HSI
+#'                          by acres.
 #'
 #' @importFrom purrr map
 #' @importFrom dplyr bind_cols select starts_with
