@@ -12,5 +12,6 @@ library(sp)
 library(purrr)
 library(exactextractr)
 library(oysteR)
+library(ggplot2)
 
 test_check("nybem")

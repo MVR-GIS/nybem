@@ -6,7 +6,7 @@
 \usage{
 summary_table(
   summary_df,
-  model_metric = c("hu_", "acres_"),
+  model_metric = c("hsi_", "acres_", "hu_"),
   polys,
   poly_field,
   caption,
@@ -18,7 +18,7 @@ summary_table(
 \code{summarize_models} function.}
 
 \item{model_metric}{character; The model metric to be summarized from the
-\code{summary_df}. One of "hu_" or "acres_".}
+\code{summary_df}. One of "hsi_", "acres_", or "hu_".}
 
 \item{polys}{sf; A sf polygon object.}
 

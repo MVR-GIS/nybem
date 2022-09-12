@@ -4,7 +4,7 @@
 \alias{ifelse}
 \title{Raster Con Function}
 \usage{
-ifelse(condition, true_value, false_value)
+ifelse(condition, true_value, false_value, method = "arith")
 }
 \arguments{
 \item{condition}{raster or numeric; an expression that results in a
@@ -13,6 +13,9 @@ boolean, matching the type of the condition.}
 \item{true_value}{raster, constant; Input true raster or constant value.}
 
 \item{false_value}{raster, constant; Input false raster or constant value.}
+
+\item{method}{character; Method for calculating the output raster.
+One of: "arith", "overlay"}
 }
 \value{
 the true or false value matching the data type of the condition.
@@ -23,8 +26,26 @@ Spatial Analyst \code{Con} function. The purpose of this function is to
 provide R with a raster safe \code{ifelse} function.
 }
 \details{
-This function was proposed by
+The R raster world has long lacked an efficient equivalent to the
+ESRI \code{Con} function. Benchmarking is necessary to determine the efficiency
+of these various methods for conplex expressions on large real-world
+rasters.
+}
+\section{method = "arith"}{
+
+The functional form of the method = "arith" was proposed by
 \href{https://gis.stackexchange.com/users/865/spacedman}{Spacedman} on
 gis.stackexchange way back in 2013,
-\href{https://gis.stackexchange.com/questions/69734/}{What is the equivalent of arcpy "Con" in QGIS and/or R raster-package?}
+\href{https://gis.stackexchange.com/questions/69734/}{What is the equivalent of arcpy "Con" in QGIS and/or R raster-package?}. The
+implementation of this method uses the \code{raster} \code{Arith-methods} using
+standard arithmetic operators on rasters.
 }
+
+\section{method = "overlay"}{
+
+The \code{raster} package documentation suggests that the \code{overlay} function
+may be faster for large rasters and complex functions than the
+\code{Arith-methods}. Also see:
+\href{https://stackoverflow.com/questions/56049806/}{Raster ifelse conditional in R?}.
+}
+

@@ -2,8 +2,8 @@
 cat_ras <- raster::raster(ncol = 2, nrow = 2, vals = rep_len(1, 4))
 cat_ras <- raster::ratify(cat_ras)
 
-write_cat_tif(cat_ras, tempdir(), "cat_ras1")
-write_cat_tif(cat_ras, tempdir(), "cat_ras2.tif")
+write_cat_tiff(cat_ras, tempdir(), "cat_ras1")
+write_cat_tiff(cat_ras, tempdir(), "cat_ras2.tif")
 
 test_that("check files written", {
   expect_true(file.exists(file.path(tempdir(), "cat_ras1.tif")))

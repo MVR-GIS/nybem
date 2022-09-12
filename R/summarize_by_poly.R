@@ -18,6 +18,7 @@
 #'   * hu_<model_name> -    Habitat Units (HU) calculated by multiplying HSI
 #'                          by acres.
 #'
+#' @importFrom sf st_crs
 #' @importFrom rlang enquo !! := sym
 #' @importFrom exactextractr exact_extract
 #' @importFrom raster xres yres
@@ -29,7 +30,7 @@ summarize_by_poly <- function(hsi_model, polys, progress = TRUE) {
   # Check inputs
   if(!is_RasterLayer(hsi_model)) {stop("hsi_model must be a raster")}
   if(!class(polys)[1] == "sf") {stop("polys must be an sf object")}
-  if(st_crs(hsi_model) != st_crs(polys)) {
+  if(sf::st_crs(hsi_model) != sf::st_crs(polys)) {
     stop("hsi_model and polys coordinate reference systems must match")}
   if(!is.logical(progress) == TRUE) {stop("progress must be logical")}
 

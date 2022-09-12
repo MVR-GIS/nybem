@@ -24,6 +24,8 @@ Roxygen: list(markdown = TRUE)
 Suggests: 
     diffviewer,
     ecorest,
+    ggplot2,
+    microbenchmark,
     oysteR,
     rgdal,
     rmarkdown,
