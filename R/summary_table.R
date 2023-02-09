@@ -42,7 +42,7 @@ summary_table <- function(summary_df,
     dplyr::mutate(ID = as.numeric(row.names(.))) %>%
     dplyr::inner_join(polys_label_df, by = "ID") %>%
     dplyr::relocate(feature_name, .before = 1) %>%
-    dplyr::select(-c(ID, .data$geometry))
+    dplyr::select(!any_of(c("ID", "geometry", "Shape")))
 
   # Create table
   col_names <- stringr::str_replace_all(colnames(summary_df_metric), "_", " ")
